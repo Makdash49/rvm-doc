@@ -7,16 +7,14 @@ owner: Buildpacks
 
 ## <a id='cf-app-utils'></a>Overview of RVM##
 
-RVM is a command-line tool for installing and managing Ruby versions and their gems. It was created by Wayne E. Sequin. RVM stands for Ruby Version Manager.
+RVM is a command-line tool for installing and managing Ruby versions and Ruby gems. It was created by Wayne E. Sequin. RVM stands for Ruby Version Manager.
 
-RVM is very helpful when you need to change the version of Ruby you are working with.
-
-It is also helpful when…
+RVM is very helpful when you are working on multiple projects that use different versions of Ruby.  RVM allows you to easily switch between different versions of Ruby which you have installed on your computer.  RVM also helps you avoid conflicts with Ruby Gems that work only with specific Ruby versions.
 
 This is the official website for RVM: https://rvm.io/
 
 
-## <a id='vcap-services-defines-database-url'></a>Checking Your RVM ##
+## <a id='vcap-services-defines-database-url'></a>Check Your RVM ##
 
 Check to see if RVM is installed by typing this command in your terminal: `rvm -v`
 
@@ -27,10 +25,10 @@ If RVM is installed you will see a message that shows the version number.
   rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
 </pre>
 
-If the reply has the word (latest) in parenthesis then you know you have the latest version.  Otherwise download the latest version following the steps in the next section.
+If the reply includes `(latest)` then you know you have the latest version.  Otherwise download the latest version following the steps in the next section.
 
 
-You can see pertinent information about RVM with this command: `rvm info`
+You can see useful information about RVM with this command: `rvm info`
 
 
 <pre class="terminal">
@@ -78,7 +76,7 @@ You can see pertinent information about RVM with this command: `rvm info`
 </pre>
 
 
-## <a id='rails-applications-have-autoconfigured-database-yml'></a>Installing RVM ##
+## <a id='rails-applications-have-autoconfigured-database-yml'></a>Install RVM ##
 
 Install RVM by typing this command in your terminal:
 `\curl -L https://get.rvm.io | bash -s stable`
@@ -96,7 +94,7 @@ This should return: `rvm is a function`
 
 If RVM did not load correctly you may see a message that directs you to make changes to your `~/.bash_profile` or your `~/.bashrc file`.
 
-For instance, you may need to change your export PATHS so they have `$PATH` at the beginnings of the strings rather than at the ends so that they look like this:
+For instance, you may need to change your export paths so they have `$PATH` at the beginnings of the strings rather than at the ends so that they look like this:
 
 
 
@@ -114,8 +112,9 @@ You may also need to add this line to your `~/.bash_profile` if is not added aut
 </pre>
 
 
-Once you have made these change, close the Terminal and open a new Terminal window.
+Once you have made these changes, close the Terminal and open a new Terminal window.
 
+## <a id='change-ruby-versions'></a>Install Ruby##
 
 Install the latest version of Ruby and set it as default with this command:
 `rvm use ruby --install --default`
@@ -130,7 +129,7 @@ For instance: `rvm install 1.9.2`
 <p class='note'><strong>Note</strong>: You can check the path of RVM after installation with this
   command: <code>env | egrep -v '^PATH' | egrep '^rvm_path'</code></p>
 
-## <a id='change-ruby-versions'></a>Changing Ruby Versions ##
+## <a id='change-ruby-versions'></a>Change Ruby Versions ##
 
 See what versions of Ruby you have installed with `rvm list`
 
@@ -150,15 +149,15 @@ See what versions of Ruby you have installed with `rvm list`
 </pre>
 
 
-To switch to a different version of Ruby, type `rvm use VERSION`
+To switch to a different version of Ruby, type `rvm use VERSION`.
 
 For instance: `rvm use 1.9.2`
 
-Type `ruby -v` to see that it has changed.
+Type `ruby -v` to see that the Ruby version has changed.
 
-Now all gems will be installed for this version of Ruby.
+Any Gems you install will be for this version of Ruby.
 
-If you want to switch back to the System Ruby type: `rvm system`.
+If you want to switch back to the System Ruby type `rvm system`.
 
 
-## <a id='migrate'></a>Isolating Ruby Versions##
+## <a id='migrate'></a>Isolate Ruby Versions##
