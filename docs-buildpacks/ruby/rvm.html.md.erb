@@ -1,0 +1,168 @@
+---
+title: Ruby Version Manager
+owner: Buildpacks
+---
+
+<strong><%= modified_date %></strong>
+
+## <a id='cf-app-utils'></a>Overview of RVM##
+
+RVM is a command-line tool for installing and managing Ruby versions and their gems.
+
+It was created by Wayne E. Sequin.
+
+RVM stands for Ruby Version Manager.
+
+RVM is very helpful when you need to change the version of Ruby you are working with.
+
+It is also helpful when…
+
+This is the official website for RVM: https://rvm.io/
+
+
+## <a id='vcap-services-defines-database-url'></a>Checking Your RVM ##
+
+Check to see if RVM is installed by typing this command in your terminal: `rvm -v`
+
+If RVM is installed you will see a message that shows the version number.
+
+<pre class="terminal">
+  $ rvm -v
+  rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+</pre>
+
+If the reply has the word (latest) in parenthesis then you know you have the latest version.  Otherwise download the latest version following the steps in the next section.
+
+
+You can see pertinent information about RVM with this command: `rvm info`
+
+
+<pre class="terminal">
+  $ rvm info
+
+  ruby-2.3.0:
+
+  system:
+    uname:       "Darwin Marks-MacBook-Air-2.local 15.6.0 Darwin Kernel Version 15.6.0: Mon Aug 29 20:21:34 PDT 2016; root:xnu-3248.60.11~1/RELEASE_X86_64 x86_64"
+    system:      "osx/10.11/x86_64"
+    bash:        "/bin/bash => GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)"
+    zsh:         "/bin/zsh => zsh 5.0.8 (x86_64-apple-darwin15.0)"
+
+  rvm:
+    version:      "rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]"
+    updated:      "14 hours 13 minutes 7 seconds ago"
+    path:         "/Users/markmcquillen/.rvm"
+
+  ruby:
+    interpreter:  "ruby"
+    version:      "2.3.0p0"
+    date:         "2015-12-25"
+    platform:     "x86_64-darwin15"
+    patchlevel:   "2015-12-25 revision 53290"
+    full_version: "ruby 2.3.0p0 (2015-12-25 revision 53290) [x86_64-darwin15]"
+
+  homes:
+    gem:          "/Users/markmcquillen/.rvm/gems/ruby-2.3.0"
+    ruby:         "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0"
+
+  binaries:
+    ruby:         "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin/ruby"
+    irb:          "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin/irb"
+    gem:          "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin/gem"
+    rake:         "/Users/markmcquillen/.rvm/gems/ruby-2.3.0/bin/rake"
+
+  environment:
+    PATH:         "/Users/markmcquillen/.rvm/gems/ruby-2.3.0/bin:/Users/markmcquillen/.rvm/gems/ruby-2.3.0@global/bin:/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin:/Users/markmcquillen/.rvm/bin:/Users/markmcquillen/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/heroku/bin:/Users/markmcquillen/bin"
+    GEM_HOME:     "/Users/markmcquillen/.rvm/gems/ruby-2.3.0"
+    GEM_PATH:     "/Users/markmcquillen/.rvm/gems/ruby-2.3.0:/Users/markmcquillen/.rvm/gems/ruby-2.3.0@global"
+    MY_RUBY_HOME: "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0"
+    IRBRC:        "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/.irbrc"
+    RUBYOPT:      ""
+    gemset:       ""
+</pre>
+
+
+## <a id='rails-applications-have-autoconfigured-database-yml'></a>Installing RVM ##
+
+Install RVM by typing this command in your terminal:
+`\curl -L https://get.rvm.io | bash -s stable`
+
+Close your terminal and reopen it.  
+Check to see if RVM loaded correctly by typing this command:
+`rvm | head -n 1`
+
+This should return: `= rvm` 
+
+You can also check to see if RVM loaded correctly with this command:
+`type rvm | head -1`
+
+This should return: `rvm is a function`
+
+If RVM did not load correctly you may see a message that directs you to make changes to your `~/.bash_profile` or your `~/.bashrc file`.
+
+For instance, you may need to change your export PATHS so they have `$PATH` at the beginnings of the strings rather than at the ends so that they look like this:
+
+
+
+<pre class="terminal">
+  export PATH="$PATH:/usr/local/heroku/bin"
+
+  export PATH="$PATH:/Users/markmcquillen/bin"
+</pre>
+
+
+You may also need to add this line to your `~/.bash_profile` if is not added automatically:
+
+<pre class="terminal">
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+</pre>
+
+
+Once you have made these change, close the Terminal and open a new Terminal window.
+
+
+Install the latest version of Ruby and set it as default with this command:
+`rvm use ruby --install --default`
+
+Check the Ruby version with:
+`ruby -v`
+
+You can install any version of Ruby with: `rvm install VERSION`
+
+For instance: `rvm install 1.9.2`
+
+<p class='note'><strong>Note</strong>: You can check the path of RVM after installation with this
+  command: <code>env | egrep -v '^PATH' | egrep '^rvm_path'</code></p>
+
+## <a id='change-ruby-versions'></a>Change Ruby Versions ##
+
+See what versions of Ruby you have installed with `rvm list`
+
+<pre class="terminal">
+  $ rvm list
+
+  rvm rubies
+
+     ruby-2.1.2 [ x86_64 ]
+     ruby-2.1.6 [ x86_64 ]
+  =* ruby-2.3.0 [ x86_64 ]
+
+  # => - current
+  # =* - current && default
+  #  * - default
+
+</pre>
+
+
+To switch to a different version of Ruby, type `rvm use VERSION`
+
+For instance: `rvm use 1.9.2`
+
+Type `ruby -v` to see that it has changed.
+
+Now all gems will be installed for this version of Ruby.
+
+If you want to switch back to the System Ruby type: `rvm system`.
+
+
+## <a id='migrate'></a>Isolate Ruby Versions##

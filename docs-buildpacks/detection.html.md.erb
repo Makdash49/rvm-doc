@@ -1,0 +1,19 @@
+---
+title: Buildpack Detection
+owner: Buildpacks
+---
+
+<strong><%= modified_date %></strong>
+
+When you push an app, Cloud Foundry determines which buildpack to use by running each enabled buildpacks' detect script during [staging](https://docs.cloudfoundry.org/concepts/how-applications-are-staged.html). 
+
+During staging, each buildpack has a position in a priority list (identified by running `cf buildpacks`). Cloud Foundry checks if the buildpack in position 1 is a compatible buildpack. If the position 1 buildpack is not compatible, Cloud Foundry moves on to the buildpack in position 2. Cloud Foundry continues this process until the correct buildpack is found. If no buildpack is compatible  `cf push` fails with the error:
+
+```
+None of the buildpacks detected a compatible application
+Exit status 222
+Staging failed: Exited with status 222
+
+FAILED
+NoAppDetectedError
+```
