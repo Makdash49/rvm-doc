@@ -1,6 +1,5 @@
 # rvm-doc
 
-# rvm-documentation
 RVM documentation using the Cloud Foundry Bookbinder template
 
 To see the documentation:
