@@ -149,7 +149,7 @@ See what versions of Ruby you have installed with `rvm list`
 </pre>
 
 
-To switch to a different version of Ruby, type `rvm use VERSION`.
+To switch to a different version of Ruby, type: `rvm use VERSION`
 
 For instance: `rvm use 1.9.2`
 
@@ -157,22 +157,22 @@ Type `ruby -v` to see that the Ruby version has changed.
 
 Any Gems you install will be for this version of Ruby.
 
-If you want to switch back to the System Ruby type `rvm system`.
+If you want to switch back to the System Ruby type: `rvm system`
 
 
 ## <a id='migrate'></a>Isolate Ruby Versions##
 
-You can set a Ruby version to a project so that the project will always use that Ruby version and the corresponding Gems.  When you change to a project that you have set with a different Ruby version than the one your are using, the Ruby version you are using will automatically change.
+You can set a Ruby version to a project so that the project will always use that Ruby version and the corresponding Gems.
 
 Create a `.rvmrc` file in the root directory of a Ruby project.
 
-In the `.rvmcr` file type:  `rvm RUBY-VERSION@CHOOSE-ANY-NAME`
+In the `.rvmrc` file type:  `rvm RUBY-VERSION@CHOOSE-ANY-NAME`
 
 For example: `rvm 2.1.2@example-project`
 
 Save and close the file.  
 
-Type `cd ..` to move to the parent directory then `cd` back into the project directory.
+Type `cd ..` in the command-line to move to the parent directory then `cd` back into the project directory.
 
 You will receive a message asking you if you trust the `.rvmcr` file.
 
@@ -206,7 +206,7 @@ You may receive a message that a gemset does not exist.
   Gemset 'ruby3' does not exist, 'rvm ruby-2.1.2 do rvm gemset create example-project' first, or append '--create'.
 </pre>
 
-Copy and paste the second quoted part of the message and run it in your command line.  In this example: `rvm ruby-2.1.2 do rvm gemset create example-project`
+Copy and paste the second quoted part of the message and run it in your command-line.  In this example: `rvm ruby-2.1.2 do rvm gemset create example-project`
 
 Go the parent directory of the project by typing: `cd ..`
 
@@ -216,13 +216,11 @@ For example:  `rvm use 2.3.0`
 
 Check the ruby version by typing: `ruby -v`  
 
-It will be the one you just changed to.
+It will be the one you just changed to.  In this example, `2.3.0`.
 
 `cd` back into your project and type:  `ruby -v`
 
-The Ruby version will be the one you set for that project.
-
-In this example:
+The Ruby version will be the one you set for that project. In this example, `2.1.2`.
 
 <pre class="terminal">
   $ ruby -v
