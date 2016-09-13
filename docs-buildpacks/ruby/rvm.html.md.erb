@@ -162,7 +162,7 @@ If you want to switch back to the System Ruby type `rvm system`.
 
 ## <a id='migrate'></a>Isolate Ruby Versions##
 
-You can set a Ruby version to a project so that the project will always use that Ruby version and the corresponding Gems.  When you change to a project that you have set with a different Ruby version, the Ruby version you are using will automatically change.
+You can set a Ruby version to a project so that the project will always use that Ruby version and the corresponding Gems.  When you change to a project that you have set with a different Ruby version than the one your are using, the Ruby version you are using will automatically change.
 
 Create a `.rvmrc` file in the root directory of a Ruby project.
 
@@ -177,7 +177,7 @@ Type `cd ..` to move to the parent directory then `cd` back into the project dir
 You will receive a message asking you if you trust the `.rvmcr` file.
 
 <pre class="terminal">
-  $ cd ExampleProject
+  $ cd example-project
   You are using '.rvmrc', it requires trusting, it is slower and it is not compatible with other ruby managers,
   you can switch to '.ruby-version' using 'rvm rvmrc to ruby-version'
   or ignore this warning with 'rvm rvmrc warning ignore /Users/markmcquillen/Desktop/rvmrc/Ruby3/.rvmrc',
@@ -206,14 +206,28 @@ You may receive a message that a gemset does not exist.
   Gemset 'ruby3' does not exist, 'rvm ruby-2.3.0 do rvm gemset create example-project' first, or append '--create'.
 </pre>
 
-Copy and paste the quoted part of the message and run it in your command line.  In this example: `rvm ruby-2.3.0 do rvm gemset create example-project`
+Copy and paste the second quoted part of the message and run it in your command line.  In this example: `rvm ruby-2.3.0 do rvm gemset create example-project`
 
-`cd` out of the project and into a project you have set with a different Ruby version using a `.rvmrc` file.
+Go the parent directory of the project by typing: `cd ..`
 
-Check the ruby version by typing: `ruby -v`
+Change to a different Ruby version by typing:  `rvm use DIFFERENT-RUBY-VERSION`
 
-It will be the Ruby version you set for that project.
+For example:  `rvm use 2.3.0`
 
+Check the ruby version by typing: `ruby -v`  
+
+It will be the one you just changed to.
+
+`cd` back into your project and type:  `ruby -v`
+
+The Ruby version will be the one you set for that project.
+
+In this example:
+
+<pre class="terminal">
+  $ ruby -v
+  ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-darwin13.0]
+</pre>
 
 
 
