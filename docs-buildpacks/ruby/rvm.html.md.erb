@@ -5,16 +5,16 @@ owner: Buildpacks
 
 <strong><%= modified_date %></strong>
 
-## <a id='cf-app-utils'></a>Overview of RVM##
+## <a id='overview-of-rvm'></a>Overview of RVM##
 
 RVM is a command line tool for installing and managing Ruby versions and Ruby gems. It was created by Wayne E. Sequin. RVM stands for Ruby Version Manager.
 
-RVM is very helpful when you are working on multiple projects that use different versions of Ruby.  RVM allows you to easily switch between different versions of Ruby which you have installed on your computer.  RVM also helps you avoid conflicts with Ruby gems that work only with specific Ruby versions.
+RVM helps you work on multiple projects that use different versions of Ruby. It allows you to easily switch between different versions of Ruby which you have installed on your computer. RVM also helps you avoid conflicts with Ruby gems that only work with specific Ruby versions.
 
 The official website for RVM is: https://rvm.io/
 
 
-## <a id='vcap-services-defines-database-url'></a>Check Your RVM ##
+## <a id='check-your-rvm'></a>Check Your RVM ##
 
 Check to see if RVM is installed by typing this command in your terminal: `rvm -v`
 
@@ -25,7 +25,7 @@ If RVM is installed you will see a message that shows the version number.
   rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
 </pre>
 
-If the reply includes `(latest)` then you know you have the latest version.  Otherwise download the latest version following the steps in the next section.
+If the reply includes `(latest)` you know you have the latest version.  Otherwise download the latest version following the steps in the next section.
 
 
 You can see useful information about RVM with this command: `rvm info`
@@ -76,7 +76,7 @@ You can see useful information about RVM with this command: `rvm info`
 </pre>
 
 
-## <a id='rails-applications-have-autoconfigured-database-yml'></a>Install RVM ##
+## <a id='install-rvm'></a>Install RVM ##
 
 Install RVM by typing this command in your terminal:
 `\curl -L https://get.rvm.io | bash -s stable`
@@ -112,9 +112,9 @@ You may also need to add this line to your `~/.bash_profile` if it was not added
 </pre>
 
 
-Once you have made these changes, close the Terminal and open a new Terminal window.
+To activate your changes, close the Terminal and open a new Terminal window.
 
-## <a id='change-ruby-versions'></a>Install Ruby##
+## <a id='install-ruby'></a>Install Ruby##
 
 Install the latest version of Ruby and set it as default with this command:
 `rvm use ruby --install --default`
@@ -126,8 +126,7 @@ You can install any version of Ruby with: `rvm install VERSION`
 
 For instance: `rvm install 2.1.6`
 
-<p class='note'><strong>Note</strong>: You can check the path of RVM after installation with this
-  command: <code>env | egrep -v '^PATH' | egrep '^rvm_path'</code></p>
+<p class='note'><strong>Note</strong>: You can check the path of the RVM installation with this command: <code>env | egrep -v '^PATH' | egrep '^rvm_path'</code></p>
 
 ## <a id='change-ruby-versions'></a>Change Ruby Versions ##
 
@@ -160,7 +159,7 @@ Any gems you install will be for this version of Ruby.
 If you want to switch back to the System Ruby type: `rvm system`
 
 
-## <a id='migrate'></a>Isolate Ruby Versions##
+## <a id='isolate-ruby-verions'></a>Isolate Ruby Versions##
 
 You can set a Ruby version to a project so that the project will always use that Ruby version and the corresponding gems.
 
@@ -172,7 +171,9 @@ For example: `rvm 2.1.2@example-project`
 
 Save and close the file.  
 
-Type `cd ..` in the command line to move to the parent directory then `cd` back into the project directory.
+Type `cd ..` in the command line to move to the parent directory. 
+
+`cd` back into the project directory.
 
 You will receive a message asking if you trust the `.rvmcr` file.
 
