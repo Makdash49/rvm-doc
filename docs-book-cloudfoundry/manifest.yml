@@ -1,9 +1,9 @@
 ---
 applications:
-- name: marks-bookbinder
+- name: marks-rvm-doc
   buildpack: ruby_buildpack
   domain: cfapps.io
-  host: marks-book
+  host: marks-rvm-doc
   instances: 3
   memory: 256M
   path: final_app

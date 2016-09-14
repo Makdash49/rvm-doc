@@ -1,0 +1,974 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Mark's Ruby Version Manager Documentation |
+    Cloud Foundry Docs
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="/stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="/javascripts/all.js"></script>
+  <script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22181585-2']);
+  _gaq.push(['_setDomainName', 'cloudfoundry.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>
+
+<!-- CrazyEgg Tracking Script -->
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  setTimeout(function() {
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0020/8294.js?" + Math.floor(new Date().getTime() / 3600000);
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a, b)
+  }, 1);
+}
+</script>
+
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  (function() {
+    var didInit = false;
+
+    function initMunchkin() {
+      if (didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+}
+</script>
+
+
+</head>
+
+<body class="buildpacks buildpacks_ruby buildpacks_ruby_rvm has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "cloudfoundry.org";
+    </script>
+
+       
+    <header class="header header-layout">
+      <h1 class="logo">
+        <a href="/">Cloud Foundry Documentation</a>
+      </h1>
+      
+      <div class="header-links js-bar-links">
+        <div class="btn-menu" data-behavior="MenuMobile"></div>
+        
+        <div class="header-item">
+          <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+        </div>
+        <div class="searchbox header-item">
+  <form method="get" action="/search">
+    <input name="q" placeholder="Search" class="search-box" />
+  </form>
+</div>
+
+      </div>
+    </header>
+
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="js-sidenav collapsible nav-container" role="navigation" data-behavior="Collapsible">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul>
+      <li class="has_submenu">
+        <a href="/deploying/index.html">Deploying Cloud Foundry</a>
+        <ul>
+          <li class="has_submenu">
+            <a href="/deploying/aws/index.html">Preparing to Deploy on Amazon Web Services</a>
+            <ul>
+              <li>
+                <a href="/deploying/aws/setup_aws.html">Setting up an AWS Environment for Cloud Foundry with BOSH AWS Bootstrap</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/setup_bosh_aws.html">Deploying BOSH on AWS</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for AWS</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/openstack/index.html">Preparing to Deploy on OpenStack</a>
+            <ul>
+              <li>
+                <a href="/deploying/openstack/validate_openstack.html">Validate your OpenStack Instance</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/security_group.html">Security Group for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/set-up-dns.html">DNS Setup for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/required-flavors.html">Required Instance Flavors for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for OpenStack</a>
+              </li>
+              <li class="has_submenu">
+                <span>Additional OpenStack Configuration</span>
+                <ul>
+                  <li>
+                    <a href="/deploying/openstack/troubleshooting.html">Troubleshooting Cloud Foundry on OpenStack</a>
+                  </li>
+                  <li>
+                    <a href="/deploying/openstack/using_swift_blobstore.html">Using OpenStack Swift as a Cloud Foundry Blobstore</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vsphere/index.html">Preparing to Deploy on vSphere</a>
+            <ul>
+              <li>
+                <a href="https://bosh.io/docs/init-vsphere.html">Initializing BOSH on vSphere</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vSphere</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vcloud/index.html">Preparing to Deploy on vCloud</a>
+            <ul>
+              <li>
+                <a href="/deploying/vcloud/setup_vcloud.html">Setting up vCloud Air or vCloud Virtual Data Center Environment</a>
+              </li>
+              <li>
+                <a href="https://bosh.io/docs/init-vcloud.html">Initializing BOSH on vCloud</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vCloud Air or vCloud Director</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="has_submenu">
+            <a href="/deploying/boshlite/index.html">Preparing to Deploy on BOSH-Lite</a>
+            <ul>
+              <li>
+                <a href="/deploying/boshlite/create_a_manifest.html">Create a Deployment Manifest for Cloud Foundry on BOSH-Lite</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/deploying/common/deploy.html">Deploying Cloud Foundry</a>
+          </li>
+        <li class="has_submenu">
+          <span>Additional Configuration</span>
+          <ul>
+          <li>
+            <a href="/concepts/high-availability.html">High Availability in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/deploying/common/log_drain_blacklists.html">Log Drain Blacklist Configuration</a>
+          </li>
+          <li>
+            <a href="/deploying/common/consul-security.html">Security Configuration for Consul</a>
+          </li>
+          <li>
+            <a href="https://github.com/cloudfoundry-community/cf-services-contrib-release">Deploying Community Services</a>
+          </li>
+          <li>
+            <a href="/deploying/common/cc-blobstore-config.html">Cloud Controller Blobstore Configuration</a>
+          </li>
+          </ul>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Cloud Foundry Command Line Interface (cf CLI)</span>
+        <ul>
+          <li>
+            <a href="/cf-cli/install-go-cli.html">Installing the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/getting-started.html">Getting Started with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/http-proxy.html">Using the cf CLI with an HTTP Proxy Server</a>
+          </li>
+          <li>
+            <a href="/cf-cli/self-signed.html">Using the cf CLI with a Self-Signed Certificate</a>
+          </li>
+          <li>
+            <a href="/cf-cli/use-cli-plugins.html">Using cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/cf-cli/develop-cli-plugins.html">Developing cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-startup.html">About Starting Applications</a>
+          </li>
+          <li>
+            <a href="/cf-cli/cf-help.html">cf CLI Reference Guide</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Develop and Manage Applications
+        </span>
+        <ul>
+          <li>
+            <a href="/devguide/deploy-apps/prepare-to-deploy.html">Considerations for Designing and Running an Application in the Cloud</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/index.html">Understanding Application Deployment</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/deploy-app.html">Deploy an Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/large-app-deploy.html">Deploying a Large Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/manifest.html">Deploying with Application Manifests</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-lifecycle.html">Application Container Lifecycle</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/cf-scale.html">Scaling an Application Using cf scale</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/routes-domains.html">Routes and Domains</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/stacks.html">Changing Stacks</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/environment-variable.html">Cloud Foundry Environment Variables</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/blue-green.html">Using Blue-Green Deployment to Reduce Downtime and Risk</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/streaming-logs.html">Application Logging in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-ssh-overview.html">Application SSH Overview</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-apps.html">Accessing Apps with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-services.html">Accessing Services with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/running/cf-api-endpoint.html">Identifying your Cloud Foundry API Endpoint and Version</a>
+          </li>
+          <li class="has_submenu">
+            <span>Integrating Service Instances with Applications</span>
+            <ul>
+              <li>
+                <a href="/devguide/services/">Services Overview</a>
+              </li>
+              <li>
+                <a href="/devguide/services/application-binding.html">Delivering Service Credentials to an Application</a>
+              </li>
+              <li>
+                <a href="/devguide/services/managing-services.html">Managing Service Instances with the CLI</a>
+              </li>
+              <li>
+                <a href="/devguide/services/service-keys.html">Managing Service Keys</a>
+              </li>
+              <li>
+                <a href="/devguide/services/user-provided.html">User-Provided Service Instances</a>
+              </li>
+              <li>
+                <a href="/devguide/services/route-binding.html">Manage Application Requests with Route Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/play-service-bindings.html">Configuring Play Framework Service Connections</a>
+              </li>
+              <li>
+                <a href="/devguide/services/migrate-db.html">Migrating a Database in Cloud Foundry</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management.html">Streaming Application Logs to Log Management Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management-thirdparty-svc.html">Service-Specific Instructions for Streaming Application Logs</a>
+              </li>
+              <li>
+                <a href="/devguide/services/integrate-splunk.html">Integrating Cloud Foundry with Splunk</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Custom Services
+        </span>
+        <ul>
+          <li>
+            <a href="/services/">Custom Services</a>
+          </li>
+          <li>
+            <a href="/services/overview.html">Overview</a>
+          </li>
+          <li>
+            <a href="/services/api.html">Service Broker API</a>
+          </li>
+          <li>
+            <a href="/services/managing-service-brokers.html">Managing Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/access-control.html">Access Control</a>
+          </li>
+          <li>
+            <a href="/services/catalog-metadata.html">Catalog Metadata</a>
+          </li>
+          <li>
+            <a href="/services/binding-credentials.html">Binding Credentials</a>
+          </li>
+          <li>
+            <a href="/services/dashboard-sso.html">Dashboard Single Sign-On</a>
+          </li>
+          <li>
+            <a href="/services/examples.html">Example Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/app-log-streaming.html">Application Log Streaming</a>
+          </li>
+          <li>
+            <a href="/services/route-services.html">Route Services</a>
+          </li>
+          <li>
+            <a href="/services/supporting-multiple-cf-instances.html">Supporting Multiple Cloud Foundry Instances</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Buildpacks
+        </span>
+        <ul>
+          <li>
+            <a href="/buildpacks/">Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/detection.html">Buildpack Detection</a>
+          </li>
+          <li>
+            <a href="/buildpacks/custom.html">Custom Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/proxy-usage.html">Proxy Usage</a>
+          </li>
+          <li>
+            <a href="/buildpacks/depend-pkg-offline.html">Packaging Dependencies for Offline Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/supported-binary-dependencies.html">Supported Binary Dependencies</a>
+          </li>
+          <li>
+            <a href="/buildpacks/prod-server.html">Configuring a Production Server</a>
+          </li>
+          <li>
+          <a href="/buildpacks/merging_upstream.html">Merging from Upstream Buildpacks</a>
+          </li>
+          <li>
+          <a href="/buildpacks/upgrading_dependency_versions.html">Upgrading Dependency Versions</a>
+         </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/java/index.html">Java Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/java/bosh_custom_trusted_certs.html">BOSH Custom Trusted Certificate Support</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-tips.html">Tips for Java Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/sts.html">Cloud Foundry Eclipse Plugin</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-client.html">Cloud Foundry Java Client Library</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/build-tool-int.html">Build Tool Integration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-grails.html">Getting Started Deploying Grails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-spring.html">Getting Started Deploying Spring Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-ratpack.html">Getting Started Deploying Ratpack Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/grails-service-bindings.html">Configure Service Connections for Grails</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/spring-service-bindings.html">Configure Service Connections for Spring</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/play-service-bindings.html">Configure Service Connections for Play</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/ruby/index.html">
+              Ruby Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/ruby/ruby-tips.html">Tips for Ruby Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ruby.html">Getting Started Deploying Ruby Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ror.html">Getting Started Deploying Ruby on Rails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/sample-ror.html">Deploy a Sample Ruby on Rails App</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rake-config.html">Configure Rake Tasks for Deployed Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-environment.html">Environment Variables Defined by the Ruby Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-service-bindings.html">Configure Service Connections for Ruby</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rvm.html">Mark's Ruby Version Manager Documentation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/node/index.html">Node.js Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/node/node-tips.html">Tips for Node.js Applications</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-environment.html">Environment Variables Defined by the Node Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-service-bindings.html">Configure Service Connections for Node.js</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/binary/index.html">Binary Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/go/index.html">Go Buildpack</a>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/php/index.html">
+              PHP Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/php/gsg-php-usage.html">Deploying and Developing PHP Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-config.html">PHP Buildpack Configuration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-composer.html">Composer</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-sessions.html">Sessions</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-newrelic.html">New Relic</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-tips.html">Tips for PHP Developers</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/python/index.html">Python Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/staticfile/index.html">Staticfile Buildpack</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <a href="/running/">Run and Troubleshoot Cloud Foundry</a>
+        <ul>
+          <li>
+            <a href="/running/managing-cf/logging.html">Cloud Foundry Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/logging-config.html">Configuring System Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/usage-events.html">Usage Events and Billing</a>
+          </li>
+          <li>
+            <a href="/running/config-ssh.html">Configuring SSH Access for Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/monitoring-test.html">Monitoring and Testing Diego Components</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting.html">Troubleshooting Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-apps.html">Troubleshooting Applications</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-warden-services.html">Troubleshooting Wardenized Services</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-diego-windows.html">Troubleshooting Diego for Windows</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Administer Cloud Foundry</span>
+        <ul>
+          <li>
+            <a href="/adminguide/buildpacks.html">Adding Buildpacks to Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/manage-domains-routes.html">Managing Domains and Routes</a>
+          </li>
+          <li>
+            <a href="/adminguide/cli-user-management.html">Creating and Managing Users with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/adminguide/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a>
+          </li>
+          <li>
+            <a href="/adminguide/quota-plans.html">Creating and Modifying Quota Plans</a>
+          </li>
+          <li>
+            <a href="/adminguide/notifications.html">Getting Started with the Notifications Service</a>
+          </li>
+          <li>
+            <a href="/adminguide/app-sec-groups.html">Application Security Groups</a>
+          </li>
+          <li>
+            <a href="/adminguide/listing-feature-flags.html">Feature Flags</a>
+          </li>
+          <li>
+            <a href="/adminguide/enabling_ipv6.html">Enabling IPv6 for Hosted Applications</a>
+          </li>
+          <li>
+            <a href="/adminguide/securing-traffic.html">Securing Traffic into Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/apps-enable-diego.html">Migrating Apps to Diego</a>
+          </li>
+          <li>
+            <a href="/adminguide/hm-notifications.html">Configuring Health Monitor Notifications</a>
+          </li>
+          <li>
+            <a href="/adminguide/supporting-websockets.html">Supporting WebSockets</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Cloud Foundry Concepts
+        </span>
+        <ul>
+          <!--
+            <li>
+            <a href="/concepts/index.html">Cloud Foundry Concepts (landing)</a>
+            </li>
+          -->
+          </li>
+          <li>
+            <a href="/concepts/overview.html">Cloud Foundry Overview</a>
+          </li>
+          <li>
+            <a href="/concepts/architecture/">Cloud Foundry Components</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-architecture.html">Diego Architecture</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/dea-vs-diego.html">Differences Between DEA and Diego Architectures</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-auction.html">How the Diego Auction Allocates Jobs</a>
+          </li>
+          <li>
+            <a href="/concepts/how-applications-are-staged.html">How Applications Are Staged</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/ssh-conceptual.html">Understanding Application SSH</a>
+          </li>
+          <li>
+            <a href="/concepts/roles.html">Orgs, Spaces, Roles, and Permissions</a>
+          </li>
+          <li>
+            <a href="/concepts/security.html">Cloud Foundry Security</a>
+          </li>
+            <li>
+            <a href="/concepts/http-routing.html">HTTP Routing</a>
+          </li>
+          <li>
+            <a href="/concepts/stacks.html">Stacks</a>
+          </li>
+          <li>
+            <a href="/concepts/docker.html">Using Docker in Cloud Foundry</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="has_submenu">
+        <span>
+          Logging and Metrics in Cloud Foundry
+        </span>
+        <ul>
+          <li>
+            <a href="/loggregator/architecture.html">Overview of the Loggregator System</a>
+          </li>
+          <li>
+            <a href="/loggregator/cli-plugin.html">Installing the Loggregator Plugin for CF CLI</a>
+          </li>
+          <li>
+            <a href="/loggregator/cc-uaa-logging.html">Security Event Logging for Cloud Controller and UAA</a>
+          </li>
+          <li>
+            <a href="/loggregator/all_metrics.html">Cloud Foundry Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/dea-metrics.html">DEA Architecture Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/log-ops-guide.html">Loggregator Guide for Cloud Foundry Operators</a>
+          </li>
+          <li>
+            <a href="/loggregator/data-sources.html">Cloud Foundry Data Sources</a>
+          </li>
+          <li>
+            <a href="/loggregator/nozzle-tutorial.html">Deploying a Nozzle to the Loggregator Firehose</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/api/uaa/index.html">UAA API</a>
+      </li>
+      <li>
+        <a href="http://bosh.io/docs/">BOSH</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container" >
+    Mark's Ruby Version Manager Documentation
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li><a href="#check-your-rvm">Check Your RVM</a></li>
+<li><a href="#install-rvm">Install RVM</a></li>
+<li><a href="#install-ruby">Install Ruby</a></li>
+<li><a href="#change-ruby-versions">Change Ruby Versions</a></li>
+<li><a href="#isolate-ruby-verions">Isolate Ruby Versions</a></li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p><strong></strong></p>
+
+<p>Ruby Version Manager (RVM) is a command line tool for installing and managing Ruby versions and Ruby gems.</p>
+
+<p>RVM helps you work on multiple projects that use different versions of Ruby. It allows you to quickly switch between different versions of Ruby which you have installed on your computer. RVM helps you avoid conflicts with Ruby gems that only work with specific Ruby versions.</p>
+
+<p>The official website for RVM is: <a href="https://rvm.io/">https://rvm.io/</a></p>
+
+<h2><a id='check-your-rvm'></a>Check Your RVM</h2>
+
+<p>Check to see if RVM is installed by typing this command in your terminal: <code>rvm -v</code></p>
+
+<p>If RVM is installed you will see a message that shows the version number.</p>
+
+<pre class="terminal">
+  $ rvm -v
+  rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+</pre>
+
+<p>If the reply includes <code>(latest)</code> you know you have the latest version.  Otherwise download the latest version following the steps in the next section.</p>
+
+<p>You can see useful information about RVM with this command: <code>rvm info</code></p>
+
+<pre class="terminal">
+  $ rvm info
+
+  ruby-2.3.0:
+
+  system:
+    uname:       "Darwin Marks-MacBook-Air-2.local 15.6.0 Darwin Kernel Version 15.6.0: Mon Aug 29 20:21:34 PDT 2016; root:xnu-3248.60.11~1/RELEASE_X86_64 x86_64"
+    system:      "osx/10.11/x86_64"
+    bash:        "/bin/bash => GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)"
+    zsh:         "/bin/zsh => zsh 5.0.8 (x86_64-apple-darwin15.0)"
+
+  rvm:
+    version:      "rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]"
+    updated:      "14 hours 13 minutes 7 seconds ago"
+    path:         "/Users/markmcquillen/.rvm"
+
+  ruby:
+    interpreter:  "ruby"
+    version:      "2.3.0p0"
+    date:         "2015-12-25"
+    platform:     "x86_64-darwin15"
+    patchlevel:   "2015-12-25 revision 53290"
+    full_version: "ruby 2.3.0p0 (2015-12-25 revision 53290) [x86_64-darwin15]"
+
+  homes:
+    gem:          "/Users/markmcquillen/.rvm/gems/ruby-2.3.0"
+    ruby:         "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0"
+
+  binaries:
+    ruby:         "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin/ruby"
+    irb:          "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin/irb"
+    gem:          "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin/gem"
+    rake:         "/Users/markmcquillen/.rvm/gems/ruby-2.3.0/bin/rake"
+
+  environment:
+    PATH:         "/Users/markmcquillen/.rvm/gems/ruby-2.3.0/bin:/Users/markmcquillen/.rvm/gems/ruby-2.3.0@global/bin:/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/bin:/Users/markmcquillen/.rvm/bin:/Users/markmcquillen/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/heroku/bin:/Users/markmcquillen/bin"
+    GEM_HOME:     "/Users/markmcquillen/.rvm/gems/ruby-2.3.0"
+    GEM_PATH:     "/Users/markmcquillen/.rvm/gems/ruby-2.3.0:/Users/markmcquillen/.rvm/gems/ruby-2.3.0@global"
+    MY_RUBY_HOME: "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0"
+    IRBRC:        "/Users/markmcquillen/.rvm/rubies/ruby-2.3.0/.irbrc"
+    RUBYOPT:      ""
+    gemset:       ""
+</pre>
+
+<h2><a id='install-rvm'></a>Install RVM</h2>
+
+<p>Install RVM by typing this command in your terminal:
+<code>\curl -L https://get.rvm.io | bash -s stable</code></p>
+
+<p>Close your terminal and reopen it.<br>
+Check to see if RVM loaded correctly by typing this command:
+<code>rvm | head -n 1</code></p>
+
+<p>The response should be: <code>= rvm</code> </p>
+
+<p>You can also check to see if RVM loaded correctly with this command:
+<code>type rvm | head -1</code></p>
+
+<p>The response should be: <code>rvm is a function</code></p>
+
+<p>If RVM did not load correctly you may see a message that directs you to make changes to your <code>~/.bash_profile</code> or your <code>~/.bashrc file</code>.</p>
+
+<p>For instance, you may need to change your export paths so they have <code>$PATH</code> at the beginnings of the strings rather than at the ends so that they look like this:</p>
+
+<pre class="terminal">
+  export PATH="$PATH:/usr/local/heroku/bin"
+
+  export PATH="$PATH:/Users/markmcquillen/bin"
+</pre>
+
+<p>You may also need to add this line to your <code>~/.bash_profile</code> if it was not added automatically:</p>
+
+<pre class="terminal">
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+</pre>
+
+<p>To activate your changes, close the Terminal and open a new Terminal window.</p>
+
+<h2><a id='install-ruby'></a>Install Ruby</h2>
+
+<p>Install the latest version of Ruby and set it as default with this command:
+<code>rvm use ruby --install --default</code></p>
+
+<p>Check the Ruby version with:
+<code>ruby -v</code></p>
+
+<p>You can install any version of Ruby with: <code>rvm install VERSION</code></p>
+
+<p>For instance: <code>rvm install 2.1.6</code></p>
+
+<p class='note'><strong>Note</strong>: You can check the path of the RVM installation with this command: <code>env | egrep -v '^PATH' | egrep '^rvm_path'</code></p>
+
+<h2><a id='change-ruby-versions'></a>Change Ruby Versions</h2>
+
+<p>See which versions of Ruby you have installed with <code>rvm list</code></p>
+
+<pre class="terminal">
+  $ rvm list
+
+  rvm rubies
+
+     ruby-2.1.2 [ x86_64 ]
+     ruby-2.1.6 [ x86_64 ]
+  =* ruby-2.3.0 [ x86_64 ]
+
+  # => - current
+  # =* - current && default
+  #  * - default
+
+</pre>
+
+<p>To switch to a different version of Ruby, type: <code>rvm use VERSION</code></p>
+
+<p>For instance: <code>rvm use 2.1.2</code></p>
+
+<p>Type <code>ruby -v</code> to see that the Ruby version has changed.</p>
+
+<p>Any gems you install will be for this version of Ruby.</p>
+
+<p>If you want to switch back to the System Ruby type: <code>rvm system</code></p>
+
+<h2><a id='isolate-ruby-verions'></a>Isolate Ruby Versions</h2>
+
+<p>You can set a Ruby version to a project so that the project will always use that Ruby version and the corresponding gems.</p>
+
+<p>Create a <code>.rvmrc</code> file in the root directory of a Ruby project.</p>
+
+<p>In the <code>.rvmrc</code> file type:  <code>rvm RUBY-VERSION@CHOOSE-ANY-NAME</code></p>
+
+<p>For example: <code>rvm 2.1.2@example-project</code></p>
+
+<p>Save and close the file.  </p>
+
+<p>Type <code>cd ..</code> in the command line to move to the parent directory. </p>
+
+<p><code>cd</code> back into the project directory.</p>
+
+<p>You will receive a message asking if you trust the <code>.rvmcr</code> file.</p>
+
+<pre class="terminal">
+  $ cd example-project
+  You are using '.rvmrc', it requires trusting, it is slower and it is not compatible with other ruby managers,
+  you can switch to '.ruby-version' using 'rvm rvmrc to ruby-version'
+  or ignore this warning with 'rvm rvmrc warning ignore /Users/markmcquillen/Desktop/rvmrc/Ruby3/.rvmrc',
+  '.rvmrc' will continue to be the default project file in RVM 1 and RVM 2,
+  to ignore the warning for all files run 'rvm rvmrc warning ignore all.rvmrcs'.
+
+  ********************************************************************************
+  * NOTICE                                                                       *
+  ********************************************************************************
+  * RVM has encountered a new or modified .rvmrc file in the current directory,  *
+  * this is a shell script and therefore may contain any shell commands.         *
+  *                                                                              *
+  * Examine the contents of this file carefully to be sure the contents are      *
+  * safe before trusting it!                                                     *
+  * Do you wish to trust '/Users/markmcquillen/Desktop/rvmrc/Ruby3/.rvmrc'?      *
+  * Choose v[iew] below to view the contents                                     *
+  ********************************************************************************
+  y[es], n[o], v[iew], c[ancel]> 
+</pre>
+
+<p>Type <code>y</code> for yes and press Enter.</p>
+
+<p>You may receive a message that a gemset does not exist.</p>
+
+<pre class="terminal">
+  Gemset 'ruby3' does not exist, 'rvm ruby-2.1.2 do rvm gemset create example-project' first, or append '--create'.
+</pre>
+
+<p>Copy and paste the second quoted part of the message and run it in your command line.  In this example: <code>rvm ruby-2.1.2 do rvm gemset create example-project</code></p>
+
+<p>Go the parent directory of the project by typing: <code>cd ..</code></p>
+
+<p>Change to a different Ruby version by typing:  <code>rvm use DIFFERENT-RUBY-VERSION</code></p>
+
+<p>For example:  <code>rvm use 2.3.0</code></p>
+
+<p>Check the ruby version by typing: <code>ruby -v</code>  </p>
+
+<p>It will be the one you just changed to.  In this example, <code>2.3.0</code>.</p>
+
+<p><code>cd</code> back into your project and type:  <code>ruby -v</code></p>
+
+<p>The Ruby version will be the one you set for that project. In this example, <code>2.1.2</code>.</p>
+
+<pre class="terminal">
+  $ ruby -v
+  ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-darwin13.0]
+</pre>
+
+        <a id='repo-link' href='http://github.com/cloudfoundry/docs-buildpacks/tree/master/ruby/rvm.html.md.erb'>View the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='/'>Cloud Foundry Documentation</a>
+  &copy; 2016 <a href='http://cloudfoundry.org'>Cloud Foundry Foundation</a>. All Rights Reserved.
+</div>
+<div class="support">
+  <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+</html>

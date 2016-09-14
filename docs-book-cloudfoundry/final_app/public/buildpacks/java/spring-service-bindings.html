@@ -1,0 +1,1173 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Configuring Service Connections for Spring |
+    Cloud Foundry Docs
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="/stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="/javascripts/all.js"></script>
+  <script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22181585-2']);
+  _gaq.push(['_setDomainName', 'cloudfoundry.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>
+
+<!-- CrazyEgg Tracking Script -->
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  setTimeout(function() {
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0020/8294.js?" + Math.floor(new Date().getTime() / 3600000);
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a, b)
+  }, 1);
+}
+</script>
+
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  (function() {
+    var didInit = false;
+
+    function initMunchkin() {
+      if (didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+}
+</script>
+
+
+</head>
+
+<body class="buildpacks buildpacks_java buildpacks_java_spring-service-bindings has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "cloudfoundry.org";
+    </script>
+
+       
+    <header class="header header-layout">
+      <h1 class="logo">
+        <a href="/">Cloud Foundry Documentation</a>
+      </h1>
+      
+      <div class="header-links js-bar-links">
+        <div class="btn-menu" data-behavior="MenuMobile"></div>
+        
+        <div class="header-item">
+          <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+        </div>
+        <div class="searchbox header-item">
+  <form method="get" action="/search">
+    <input name="q" placeholder="Search" class="search-box" />
+  </form>
+</div>
+
+      </div>
+    </header>
+
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="js-sidenav collapsible nav-container" role="navigation" data-behavior="Collapsible">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul>
+      <li class="has_submenu">
+        <a href="/deploying/index.html">Deploying Cloud Foundry</a>
+        <ul>
+          <li class="has_submenu">
+            <a href="/deploying/aws/index.html">Preparing to Deploy on Amazon Web Services</a>
+            <ul>
+              <li>
+                <a href="/deploying/aws/setup_aws.html">Setting up an AWS Environment for Cloud Foundry with BOSH AWS Bootstrap</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/setup_bosh_aws.html">Deploying BOSH on AWS</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for AWS</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/openstack/index.html">Preparing to Deploy on OpenStack</a>
+            <ul>
+              <li>
+                <a href="/deploying/openstack/validate_openstack.html">Validate your OpenStack Instance</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/security_group.html">Security Group for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/set-up-dns.html">DNS Setup for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/required-flavors.html">Required Instance Flavors for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for OpenStack</a>
+              </li>
+              <li class="has_submenu">
+                <span>Additional OpenStack Configuration</span>
+                <ul>
+                  <li>
+                    <a href="/deploying/openstack/troubleshooting.html">Troubleshooting Cloud Foundry on OpenStack</a>
+                  </li>
+                  <li>
+                    <a href="/deploying/openstack/using_swift_blobstore.html">Using OpenStack Swift as a Cloud Foundry Blobstore</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vsphere/index.html">Preparing to Deploy on vSphere</a>
+            <ul>
+              <li>
+                <a href="https://bosh.io/docs/init-vsphere.html">Initializing BOSH on vSphere</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vSphere</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vcloud/index.html">Preparing to Deploy on vCloud</a>
+            <ul>
+              <li>
+                <a href="/deploying/vcloud/setup_vcloud.html">Setting up vCloud Air or vCloud Virtual Data Center Environment</a>
+              </li>
+              <li>
+                <a href="https://bosh.io/docs/init-vcloud.html">Initializing BOSH on vCloud</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vCloud Air or vCloud Director</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="has_submenu">
+            <a href="/deploying/boshlite/index.html">Preparing to Deploy on BOSH-Lite</a>
+            <ul>
+              <li>
+                <a href="/deploying/boshlite/create_a_manifest.html">Create a Deployment Manifest for Cloud Foundry on BOSH-Lite</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/deploying/common/deploy.html">Deploying Cloud Foundry</a>
+          </li>
+        <li class="has_submenu">
+          <span>Additional Configuration</span>
+          <ul>
+          <li>
+            <a href="/concepts/high-availability.html">High Availability in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/deploying/common/log_drain_blacklists.html">Log Drain Blacklist Configuration</a>
+          </li>
+          <li>
+            <a href="/deploying/common/consul-security.html">Security Configuration for Consul</a>
+          </li>
+          <li>
+            <a href="https://github.com/cloudfoundry-community/cf-services-contrib-release">Deploying Community Services</a>
+          </li>
+          <li>
+            <a href="/deploying/common/cc-blobstore-config.html">Cloud Controller Blobstore Configuration</a>
+          </li>
+          </ul>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Cloud Foundry Command Line Interface (cf CLI)</span>
+        <ul>
+          <li>
+            <a href="/cf-cli/install-go-cli.html">Installing the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/getting-started.html">Getting Started with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/http-proxy.html">Using the cf CLI with an HTTP Proxy Server</a>
+          </li>
+          <li>
+            <a href="/cf-cli/self-signed.html">Using the cf CLI with a Self-Signed Certificate</a>
+          </li>
+          <li>
+            <a href="/cf-cli/use-cli-plugins.html">Using cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/cf-cli/develop-cli-plugins.html">Developing cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-startup.html">About Starting Applications</a>
+          </li>
+          <li>
+            <a href="/cf-cli/cf-help.html">cf CLI Reference Guide</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Develop and Manage Applications
+        </span>
+        <ul>
+          <li>
+            <a href="/devguide/deploy-apps/prepare-to-deploy.html">Considerations for Designing and Running an Application in the Cloud</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/index.html">Understanding Application Deployment</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/deploy-app.html">Deploy an Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/large-app-deploy.html">Deploying a Large Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/manifest.html">Deploying with Application Manifests</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-lifecycle.html">Application Container Lifecycle</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/cf-scale.html">Scaling an Application Using cf scale</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/routes-domains.html">Routes and Domains</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/stacks.html">Changing Stacks</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/environment-variable.html">Cloud Foundry Environment Variables</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/blue-green.html">Using Blue-Green Deployment to Reduce Downtime and Risk</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/streaming-logs.html">Application Logging in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-ssh-overview.html">Application SSH Overview</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-apps.html">Accessing Apps with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-services.html">Accessing Services with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/running/cf-api-endpoint.html">Identifying your Cloud Foundry API Endpoint and Version</a>
+          </li>
+          <li class="has_submenu">
+            <span>Integrating Service Instances with Applications</span>
+            <ul>
+              <li>
+                <a href="/devguide/services/">Services Overview</a>
+              </li>
+              <li>
+                <a href="/devguide/services/application-binding.html">Delivering Service Credentials to an Application</a>
+              </li>
+              <li>
+                <a href="/devguide/services/managing-services.html">Managing Service Instances with the CLI</a>
+              </li>
+              <li>
+                <a href="/devguide/services/service-keys.html">Managing Service Keys</a>
+              </li>
+              <li>
+                <a href="/devguide/services/user-provided.html">User-Provided Service Instances</a>
+              </li>
+              <li>
+                <a href="/devguide/services/route-binding.html">Manage Application Requests with Route Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/play-service-bindings.html">Configuring Play Framework Service Connections</a>
+              </li>
+              <li>
+                <a href="/devguide/services/migrate-db.html">Migrating a Database in Cloud Foundry</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management.html">Streaming Application Logs to Log Management Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management-thirdparty-svc.html">Service-Specific Instructions for Streaming Application Logs</a>
+              </li>
+              <li>
+                <a href="/devguide/services/integrate-splunk.html">Integrating Cloud Foundry with Splunk</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Custom Services
+        </span>
+        <ul>
+          <li>
+            <a href="/services/">Custom Services</a>
+          </li>
+          <li>
+            <a href="/services/overview.html">Overview</a>
+          </li>
+          <li>
+            <a href="/services/api.html">Service Broker API</a>
+          </li>
+          <li>
+            <a href="/services/managing-service-brokers.html">Managing Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/access-control.html">Access Control</a>
+          </li>
+          <li>
+            <a href="/services/catalog-metadata.html">Catalog Metadata</a>
+          </li>
+          <li>
+            <a href="/services/binding-credentials.html">Binding Credentials</a>
+          </li>
+          <li>
+            <a href="/services/dashboard-sso.html">Dashboard Single Sign-On</a>
+          </li>
+          <li>
+            <a href="/services/examples.html">Example Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/app-log-streaming.html">Application Log Streaming</a>
+          </li>
+          <li>
+            <a href="/services/route-services.html">Route Services</a>
+          </li>
+          <li>
+            <a href="/services/supporting-multiple-cf-instances.html">Supporting Multiple Cloud Foundry Instances</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Buildpacks
+        </span>
+        <ul>
+          <li>
+            <a href="/buildpacks/">Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/detection.html">Buildpack Detection</a>
+          </li>
+          <li>
+            <a href="/buildpacks/custom.html">Custom Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/proxy-usage.html">Proxy Usage</a>
+          </li>
+          <li>
+            <a href="/buildpacks/depend-pkg-offline.html">Packaging Dependencies for Offline Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/supported-binary-dependencies.html">Supported Binary Dependencies</a>
+          </li>
+          <li>
+            <a href="/buildpacks/prod-server.html">Configuring a Production Server</a>
+          </li>
+          <li>
+          <a href="/buildpacks/merging_upstream.html">Merging from Upstream Buildpacks</a>
+          </li>
+          <li>
+          <a href="/buildpacks/upgrading_dependency_versions.html">Upgrading Dependency Versions</a>
+         </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/java/index.html">Java Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/java/bosh_custom_trusted_certs.html">BOSH Custom Trusted Certificate Support</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-tips.html">Tips for Java Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/sts.html">Cloud Foundry Eclipse Plugin</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-client.html">Cloud Foundry Java Client Library</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/build-tool-int.html">Build Tool Integration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-grails.html">Getting Started Deploying Grails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-spring.html">Getting Started Deploying Spring Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-ratpack.html">Getting Started Deploying Ratpack Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/grails-service-bindings.html">Configure Service Connections for Grails</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/spring-service-bindings.html">Configure Service Connections for Spring</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/play-service-bindings.html">Configure Service Connections for Play</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/ruby/index.html">
+              Ruby Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/ruby/ruby-tips.html">Tips for Ruby Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ruby.html">Getting Started Deploying Ruby Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ror.html">Getting Started Deploying Ruby on Rails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/sample-ror.html">Deploy a Sample Ruby on Rails App</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rake-config.html">Configure Rake Tasks for Deployed Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-environment.html">Environment Variables Defined by the Ruby Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-service-bindings.html">Configure Service Connections for Ruby</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rvm.html">Mark's Ruby Version Manager Documentation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/node/index.html">Node.js Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/node/node-tips.html">Tips for Node.js Applications</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-environment.html">Environment Variables Defined by the Node Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-service-bindings.html">Configure Service Connections for Node.js</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/binary/index.html">Binary Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/go/index.html">Go Buildpack</a>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/php/index.html">
+              PHP Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/php/gsg-php-usage.html">Deploying and Developing PHP Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-config.html">PHP Buildpack Configuration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-composer.html">Composer</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-sessions.html">Sessions</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-newrelic.html">New Relic</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-tips.html">Tips for PHP Developers</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/python/index.html">Python Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/staticfile/index.html">Staticfile Buildpack</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <a href="/running/">Run and Troubleshoot Cloud Foundry</a>
+        <ul>
+          <li>
+            <a href="/running/managing-cf/logging.html">Cloud Foundry Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/logging-config.html">Configuring System Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/usage-events.html">Usage Events and Billing</a>
+          </li>
+          <li>
+            <a href="/running/config-ssh.html">Configuring SSH Access for Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/monitoring-test.html">Monitoring and Testing Diego Components</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting.html">Troubleshooting Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-apps.html">Troubleshooting Applications</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-warden-services.html">Troubleshooting Wardenized Services</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-diego-windows.html">Troubleshooting Diego for Windows</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Administer Cloud Foundry</span>
+        <ul>
+          <li>
+            <a href="/adminguide/buildpacks.html">Adding Buildpacks to Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/manage-domains-routes.html">Managing Domains and Routes</a>
+          </li>
+          <li>
+            <a href="/adminguide/cli-user-management.html">Creating and Managing Users with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/adminguide/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a>
+          </li>
+          <li>
+            <a href="/adminguide/quota-plans.html">Creating and Modifying Quota Plans</a>
+          </li>
+          <li>
+            <a href="/adminguide/notifications.html">Getting Started with the Notifications Service</a>
+          </li>
+          <li>
+            <a href="/adminguide/app-sec-groups.html">Application Security Groups</a>
+          </li>
+          <li>
+            <a href="/adminguide/listing-feature-flags.html">Feature Flags</a>
+          </li>
+          <li>
+            <a href="/adminguide/enabling_ipv6.html">Enabling IPv6 for Hosted Applications</a>
+          </li>
+          <li>
+            <a href="/adminguide/securing-traffic.html">Securing Traffic into Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/apps-enable-diego.html">Migrating Apps to Diego</a>
+          </li>
+          <li>
+            <a href="/adminguide/hm-notifications.html">Configuring Health Monitor Notifications</a>
+          </li>
+          <li>
+            <a href="/adminguide/supporting-websockets.html">Supporting WebSockets</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Cloud Foundry Concepts
+        </span>
+        <ul>
+          <!--
+            <li>
+            <a href="/concepts/index.html">Cloud Foundry Concepts (landing)</a>
+            </li>
+          -->
+          </li>
+          <li>
+            <a href="/concepts/overview.html">Cloud Foundry Overview</a>
+          </li>
+          <li>
+            <a href="/concepts/architecture/">Cloud Foundry Components</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-architecture.html">Diego Architecture</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/dea-vs-diego.html">Differences Between DEA and Diego Architectures</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-auction.html">How the Diego Auction Allocates Jobs</a>
+          </li>
+          <li>
+            <a href="/concepts/how-applications-are-staged.html">How Applications Are Staged</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/ssh-conceptual.html">Understanding Application SSH</a>
+          </li>
+          <li>
+            <a href="/concepts/roles.html">Orgs, Spaces, Roles, and Permissions</a>
+          </li>
+          <li>
+            <a href="/concepts/security.html">Cloud Foundry Security</a>
+          </li>
+            <li>
+            <a href="/concepts/http-routing.html">HTTP Routing</a>
+          </li>
+          <li>
+            <a href="/concepts/stacks.html">Stacks</a>
+          </li>
+          <li>
+            <a href="/concepts/docker.html">Using Docker in Cloud Foundry</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="has_submenu">
+        <span>
+          Logging and Metrics in Cloud Foundry
+        </span>
+        <ul>
+          <li>
+            <a href="/loggregator/architecture.html">Overview of the Loggregator System</a>
+          </li>
+          <li>
+            <a href="/loggregator/cli-plugin.html">Installing the Loggregator Plugin for CF CLI</a>
+          </li>
+          <li>
+            <a href="/loggregator/cc-uaa-logging.html">Security Event Logging for Cloud Controller and UAA</a>
+          </li>
+          <li>
+            <a href="/loggregator/all_metrics.html">Cloud Foundry Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/dea-metrics.html">DEA Architecture Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/log-ops-guide.html">Loggregator Guide for Cloud Foundry Operators</a>
+          </li>
+          <li>
+            <a href="/loggregator/data-sources.html">Cloud Foundry Data Sources</a>
+          </li>
+          <li>
+            <a href="/loggregator/nozzle-tutorial.html">Deploying a Nozzle to the Loggregator Firehose</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/api/uaa/index.html">UAA API</a>
+      </li>
+      <li>
+        <a href="http://bosh.io/docs/">BOSH</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container" >
+    Configuring Service Connections for Spring
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li><a href="#auto">Auto-Reconfiguration</a></li>
+<li>
+<a href="#manual">Manual Configuration</a><ul><li><a href="#javaconfig">Java Configuration</a></li></ul>
+</li>
+<li>
+<a href="#cloud-profiles">Cloud Profile</a><ul><li><a href="#cloud-profiles-java">Profiles in Java Configuration</a></li></ul>
+</li>
+<li><a href="#properties">Property Placeholders</a></li>
+<li>
+<a href="#services">Service-Specific Details</a><ul>
+<li><a href="#rdbms">MySQL and Postgres</a></li>
+<li><a href="#mongodb">MongoDB</a></li>
+<li><a href="#redis">Redis</a></li>
+<li><a href="#rabbitmq">RabbitMQ</a></li>
+</ul>
+</li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p><strong></strong></p>
+
+<p>Cloud Foundry provides extensive support for connecting a Spring application to services such as MySQL, PostgreSQL, MongoDB, Redis, and RabbitMQ. In many cases, Cloud Foundry can automatically configure a Spring application without any code changes. For more advanced cases, you can control service connection parameters yourself.</p>
+
+<h2><a id='auto'></a>Auto-Reconfiguration</h2>
+
+<p>If your Spring application requires services such as a relational database or messaging system, you might be able to deploy your application to Cloud Foundry without changing any code. In this case, Cloud Foundry automatically re-configures the relevant bean definitions to bind them to cloud services.</p>
+
+<p>Cloud Foundry auto-reconfigures applications only if the following items are true for your application:</p>
+
+<ul>
+<li>Only one service instance of a given service type is bound to the application. In this context, MySQL and PostgreSQL are considered the same service type, relational database, so if both a MySQL and a PostgreSQL service are bound to the application, auto-reconfiguration will not occur.</li>
+<li>Only one bean of a matching type is in the Spring application context. For example, you can have only one bean of type <code>javax.sql.DataSource</code>.</li>
+</ul>
+
+<p>With auto-reconfiguration, Cloud Foundry creates the database or connection factory bean itself, using its own values for properties such as host, port, username and so on. For example, if you have a single <code>javax.sql.DataSource</code> bean in your application context that Cloud Foundry auto-reconfigures and binds to its own database service, Cloud Foundry does not use the username, password and driver URL you originally specified. Instead, it uses its own internal values. This is transparent to the application, which really only cares about having a relational database to which it can write data but does not really care what the specific properties are that created the database. Also note that if you have customized the configuration of a service, such as the pool size or connection properties, Cloud Foundry auto-reconfiguration ignores the customizations.</p>
+
+<p>For more information about auto-reconfiguration of specific services types, see the <a href="#services">Service-Specific Details</a> section.</p>
+
+<h2><a id='manual'></a>Manual Configuration</h2>
+
+<p>Use manual configuration if you have multiple services of a given type or you
+want to have more control over the configuration than auto-reconfiguration
+provides.</p>
+
+<p>To use manual configuration, include the <code>spring-cloud</code> library in your
+list of application dependencies.
+Update your application Maven <code>pom.xml</code> or Gradle <code>build.gradle</code> file to include
+dependencies on the
+<code>org.springframework.cloud:spring-cloud-spring-service-connector</code> and
+<code>org.springframework.cloud:spring-cloud-cloudfoundry-connector</code> artifacts.</p>
+
+<p>For example, if you use Maven to build your application, the following <code>pom.xml</code>
+snippet shows how to add this dependency.</p>
+<pre class="highlight xml"><code><span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-spring-service-connector<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.1.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>spring-cloud-cloudfoundry-connector<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.1.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre>
+
+<p>You also need to update your application build file to include the Spring Framework Milestone repository. The following <code>pom.xml</code> snippet shows how to do this for Maven:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+        <span class="nt">&lt;id&gt;</span>repository.springsource.milestone<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>SpringSource Milestone Repository<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;url&gt;</span>http://repo.springsource.org/milestone<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+     ...
+<span class="nt">&lt;/repositories&gt;</span>
+</code></pre>
+
+<h3><a id='javaconfig'></a>Java Configuration</h3>
+
+<p>Typical use of Java config involves extending the <code>AbstractCloudConfig</code> class and adding methods with the <code>@Bean</code> annotation to create beans for services. Apps migrating from <a href="http://spring.io/blog/2011/11/04/using-cloud-foundry-services-with-spring-part-2-auto-reconfiguration/">auto-reconfiguration</a> might first try <a href="#scan-services">Scanning for  Services</a> until they need more explicit control.
+Java config also offers a way to expose application and service properties. Use this for debugging or to create service connectors using a lower-level access.</p>
+
+<h4><a id='create-service-beans'></a>Create a Service Bean</h4>
+
+<p>In the following example, the configuration creates a <code>DataSource</code> bean connecting to the only relational database service bound to the app. It also creates a <code>MongoDbFactory</code> bean, again, connecting to the only MongoDB service bound to the app. Check Javadoc for <code>AbstractCloudConfig</code> for ways to connect to other services.</p>
+<pre class="highlight java"><code><span class="kd">class</span> <span class="nc">CloudConfig</span> <span class="kd">extends</span> <span class="n">AbstractCloudConfig</span> <span class="o">{</span>
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="n">DataSource</span> <span class="nf">inventoryDataSource</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">connectionFactory</span><span class="o">().</span><span class="na">dataSource</span><span class="o">();</span>
+       <span class="o">}</span>
+       <span class="o">...</span> <span class="n">more</span> <span class="n">beans</span> <span class="n">to</span> <span class="n">obtain</span> <span class="n">service</span> <span class="n">connectors</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>The bean names match the method names unless you specify an explicit value to the annotation such as <code>@Bean(&quot;inventory-service&quot;)</code>, following Spring&rsquo;s Java configuration standards.</p>
+
+<p>If you have more than one service of a type bound to the app or want to have an
+explicit control over the services to which a bean is bound, you can pass the service names to methods such as <code>dataSource()</code> and <code>mongoDbFactory()</code> as follows:</p>
+<pre class="highlight java"><code><span class="kd">class</span> <span class="nc">CloudConfig</span> <span class="kd">extends</span> <span class="n">AbstractCloudConfig</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">DataSource</span> <span class="nf">inventoryDataSource</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">connectionFactory</span><span class="o">().</span><span class="na">dataSource</span><span class="o">(</span><span class="s">"inventory-db-service"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+   <span class="nd">@Bean</span>
+   <span class="kd">public</span> <span class="n">MongoDbFactory</span> <span class="nf">documentMongoDbFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">connectionFactory</span><span class="o">().</span><span class="na">mongoDbFactory</span><span class="o">(</span><span class="s">"document-service"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+   <span class="o">...</span> <span class="n">more</span> <span class="n">beans</span> <span class="n">to</span> <span class="n">obtain</span> <span class="n">service</span> <span class="n">connectors</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<p>Method such as <code>dataSource()</code> come in an additional overloaded variant that offer specifying configuration options such as the pooling parameters. See Javadoc for more details.</p>
+
+<h4><a id='connect-gen-services'></a>Connect to Generic Services</h4>
+
+<p>Java config supports access to generic services through the <code>service()</code> method.
+Generic services do not have a directly mapped method. This is typical for a newly introduced service or when connecting to a private service in private PaaS. The generic <code>service()</code> method follows the same pattern as the
+<code>dataSource()</code>, except it allows supplying the connector type as an additional
+parameters.</p>
+
+<h4><a id='scan-services'></a>Scan for Services</h4>
+
+<p>You can scan for each bound service using the <code>@ServiceScan</code> annotation as shown below. This is conceptually similar to the @ComponentScan annotation in Spring:</p>
+<pre class="highlight java"><code><span class="nd">@Configuration</span>
+<span class="nd">@ServiceScan</span>
+<span class="kd">class</span> <span class="nc">CloudConfig</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<p>Here, one bean of the appropriate type (<code>DataSource</code> for a relational database
+service, for example) is created. Each created bean will have the <code>id</code> matching
+the corresponding service name. You can then inject such beans using auto-wiring:</p>
+<pre class="highlight java"><code><span class="nd">@Autowired</span> <span class="n">DataSource</span> <span class="n">inventoryDb</span><span class="o">;</span>
+</code></pre>
+
+<p>If the app is bound to more than one services of a type, you can use the <code>@Qualifier</code> annotation supplying it the name of the service as in the following code:</p>
+<pre class="highlight java"><code><span class="nd">@Autowired</span> <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"inventory-db"</span><span class="o">)</span> <span class="n">DataSource</span> <span class="n">inventoryDb</span><span class="o">;</span>
+<span class="nd">@Autowired</span> <span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"shipping-db"</span><span class="o">)</span> <span class="n">DataSource</span> <span class="n">shippingDb</span><span class="o">;</span>
+</code></pre>
+
+<h4><a id='access-service-providers'></a>Access Service Properties</h4>
+
+<p>You can expose raw properties for all services and the app through a bean as follows:</p>
+<pre class="highlight java"><code><span class="kd">class</span> <span class="nc">CloudPropertiesConfig</span> <span class="kd">extends</span> <span class="n">AbstractCloudConfig</span> <span class="o">{</span>
+
+   <span class="nd">@Bean</span>
+   <span class="kd">public</span> <span class="n">Properties</span> <span class="nf">cloudProperties</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">properties</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2><a id='cloud-profiles'></a>Cloud Profile</h2>
+
+<p>Spring Framework versions 3.1 and above support bean definition profiles as a way to conditionalize the application configuration so that only specific bean definitions are activated when a certain condition is true. Setting up such profiles makes your application portable to many different environments so that you do not have to manually change the configuration when you deploy it to, for example, your local environment and then to Cloud Foundry.</p>
+
+<p>See the Spring Framework documentation for additional information about using Spring bean definition profiles.</p>
+
+<p>When you deploy a Spring application to Cloud Foundry, Cloud Foundry automatically enables the <code>cloud</code> profile.</p>
+
+<p class="note"><strong>Note</strong>: Cloud Foundry auto-reconfiguration requires the Spring application to be version 3.1 or later and include the Spring context JAR. If you are using an earlier version, update your framework or use a custom buildpack.</p>
+
+<h3><a id='cloud-profiles-java'></a>Profiles in Java Configuration</h3>
+
+<p>The <code>@Profile</code> annotation can be placed on <code>@Configuration</code> classes in a Spring
+application to set conditions under which configuration classes are invoked. By using the <code>default</code> and <code>cloud</code> profiles to determine whether the application is running on Cloud Foundry or not, your Java configuration can support both local and cloud deployments using Java configuration classes like these:</p>
+<pre class="highlight plaintext"><code>public class Configuration {
+    @Configuration
+    @Profile("cloud")
+    static class CloudConfiguration {
+
+        @Bean
+        public DataSource dataSource() {
+            CloudFactory cloudFactory = new CloudFactory();
+            Cloud cloud = cloudFactory.getCloud();
+            String serviceID = cloud.getServiceID();
+            return cloud.getServiceConnector(serviceID, DataSource.class, null);
+        }
+    }
+
+    @Configuration
+    @Profile("default")
+    static class LocalConfiguration {
+
+    @Bean
+        public DataSource dataSource() {
+            BasicDataSource dataSource = new BasicDataSource();
+            dataSource.setUrl("jdbc:postgresql://localhost/db");
+            dataSource.setDriverClassName("org.postgresql.Driver");
+            dataSource.setUsername("postgres");
+            dataSource.setPassword("postgres");
+            return dataSource;
+        }
+    }
+}
+</code></pre>
+
+<h2><a id='properties'></a>Property Placeholders</h2>
+
+<p>Cloud Foundry exposes a number of application and service properties directly into its deployed applications. The properties exposed by Cloud Foundry include basic information about the application, such as its name and the cloud provider, and detailed connection information for all services currently bound to the application.</p>
+
+<p>Service properties generally take one of the following forms:</p>
+<pre class="highlight shell"><code>cloud.services.<span class="o">{</span>service-name<span class="o">}</span>.connection.<span class="o">{</span>property<span class="o">}</span>
+cloud.services.<span class="o">{</span>service-name<span class="o">}</span>.<span class="o">{</span>property<span class="o">}</span>
+</code></pre>
+
+<p>In this form, <code>{service-name}</code> refers to the name you gave the service when you bound it to your application at deploy time, and <code>{property}</code> is a field in the credentials section of the <code>VCAP_SERVICES</code> environment variable.</p>
+
+<p>For example, assume that you created a Postgres service called <code>my-postgres</code> and then bound it to your application. Assume also that this service exposes credentials in <code>VCAP_SERVICES</code> as discrete fields. Cloud Foundry exposes the following properties about this service:</p>
+<pre class="highlight shell"><code>cloud.services.my-postgres.connection.hostname
+cloud.services.my-postgres.connection.name
+cloud.services.my-postgres.connection.password
+cloud.services.my-postgres.connection.port
+cloud.services.my-postgres.connection.username
+cloud.services.my-postgres.plan
+cloud.services.my-postgres.type
+</code></pre>
+
+<p>If the service exposed the credentials as a single <code>uri</code> field, then the following properties would be set up:</p>
+<pre class="highlight shell"><code>cloud.services.my-postgres.connection.uri
+cloud.services.my-postgres.plan
+cloud.services.my-postgres.type
+</code></pre>
+
+<p>For convenience, if you have bound just one service of a given type to your
+application, Cloud Foundry creates an alias based on the service type instead of the
+service name. For example, if only one MySQL service is bound to an application, the
+properties takes the form <code>cloud.services.mysql.connection.{property}</code>. Cloud
+Foundry uses the following aliases in this case:</p>
+
+<ul>
+<li><code>mysql</code></li>
+<li><code>postgresql</code></li>
+<li><code>mongodb</code></li>
+<li><code>redis</code></li>
+<li><code>rabbitmq</code></li>
+</ul>
+
+<p>A Spring application can take advantage of these Cloud Foundry properties using the property placeholder mechanism. For example, assume that you have bound a MySQL service called <code>spring-mysql</code> to your application. Your application requires a <code>c3p0</code> connection pool instead of the connection pool provided by Cloud Foundry, but you want to use the same connection properties defined by Cloud Foundry for the MySQL service - in particular the username, password and JDBC URL.</p>
+
+<p>The following table lists all the application properties that Cloud Foundry exposes to deployed applications.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>cloud.application.name</code></td>
+<td>The name provided when the application was pushed to Cloud Foundry.</td>
+</tr>
+<tr>
+<td><code>cloud.provider.url</code></td>
+<td>The URL of the cloud hosting the application, such as <code>cloudfoundry.com</code>.</td>
+</tr>
+</tbody></table>
+
+<p>The service properties that are exposed for each type of service are listed in the <a href="#services">Service-Specific Details</a> section.</p>
+
+<h2><a id='services'></a>Service-Specific Details</h2>
+
+<p>The following sections describe Spring auto-reconfiguration and manual configuration for the services supported by Cloud Foundry.</p>
+
+<h3><a id='rdbms'></a>MySQL and Postgres</h3>
+
+<h4><a id='mysql-auto-reconfig'></a>Auto-Reconfiguration</h4>
+
+<p>Auto-reconfiguration occurs if Cloud Foundry detects a <code>javax.sql.DataSource</code> bean in the Spring application context. The following snippet of a Spring application context file shows an example of defining this type of bean which Cloud Foundry will detect and potentially auto-reconfigure:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="na">destroy-method=</span><span class="s">"close"</span> <span class="na">id=</span><span class="s">"dataSource"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"driverClassName"</span> <span class="na">value=</span><span class="s">"org.h2.Driver"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"url"</span> <span class="na">value=</span><span class="s">"jdbc:h2:mem:"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">value=</span><span class="s">"sa"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">value=</span><span class="s">""</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre>
+
+<p>The relational database that Cloud Foundry actually uses depends on the service instance you explicitly bind to your application when you deploy it: MySQL or Postgres. Cloud Foundry creates either a commons DBCP or Tomcat datasource depending on which datasource implementation it finds on the classpath.</p>
+
+<p>Cloud Foundry internally generates values for the following properties: <code>driverClassName</code>, <code>url</code>, <code>username</code>, <code>password</code>, <code>validationQuery</code>.</p>
+
+<h4><a id='mysql-man-java-reconfig'></a>Manual Configuration in Java</h4>
+
+<p>To configure a database service in Java configuration, create a <code>@Configuration</code> class with a <code>@Bean</code> method to return a <code>javax.sql.DataSource</code> bean. The bean can be created by helper classes in the <code>spring-cloud</code> library, as shown here:</p>
+<pre class="highlight plaintext"><code>@Configuration
+public class DataSourceConfig {
+    @Bean
+    public DataSource dataSource() {
+        CloudFactory cloudFactory = new CloudFactory();
+        Cloud cloud = cloudFactory.getCloud();
+        String serviceID = cloud.getServiceID();
+        return cloud.getServiceConnector(serviceID, DataSource.class, null);
+    }
+}
+</code></pre>
+
+<h3><a id='mongodb'></a>MongoDB</h3>
+
+<h4><a id='mongodb-auto-reconfig'></a>Auto-Reconfiguration</h4>
+
+<p>You must use Spring Data MongoDB 1.0 M4 or later for auto-reconfiguration to work.</p>
+
+<p>Auto-reconfiguration occurs if Cloud Foundry detects an <code>org.springframework.data.document.mongodb.MongoDbFactory</code> bean in the Spring application context. The following snippet of a Spring XML application context file shows an example of defining this type of bean which Cloud Foundry will detect and potentially auto-reconfigure:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;mongo:db-factory</span>
+    <span class="na">id=</span><span class="s">"mongoDbFactory"</span>
+    <span class="na">dbname=</span><span class="s">"pwdtest"</span>
+    <span class="na">host=</span><span class="s">"127.0.0.1"</span>
+    <span class="na">port=</span><span class="s">"1234"</span>
+    <span class="na">username=</span><span class="s">"test_user"</span>
+    <span class="na">password=</span><span class="s">"test_pass"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<p>Cloud Foundry creates a <code>SimpleMongoDbFactory</code> with its own values for the following properties: <code>host</code>, <code>port</code>, <code>username</code>, <code>password</code>, <code>dbname</code>.</p>
+
+<h4><a id='mongodb-man-java-reconfig'></a>Manual Configuration in Java</h4>
+
+<p>To configure a MongoDB service in Java configuration, create a <code>@Configuration</code> class with a <code>@Bean</code> method to return an  <code>org.springframework.data.mongodb.MongoDbFactory</code> bean from Spring Data MongoDB. The bean can be created by helper classes in the <code>spring-cloud</code> library, as shown here:</p>
+<pre class="highlight plaintext"><code>@Configuration
+public class MongoConfig {
+
+    @Bean
+    public MongoDbFactory mongoDbFactory() {
+        CloudFactory cloudFactory = new CloudFactory();
+        Cloud cloud = cloudFactory.getCloud();
+        MongoServiceInfo serviceInfo = (MongoServiceInfo) cloud.getServiceInfo("my-mongodb");
+        String serviceID = serviceInfo.getID();
+        return cloud.getServiceConnector(serviceID, DataSource.class, null);
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongoDbFactory());
+    }
+}
+</code></pre>
+
+<h3><a id='redis'></a>Redis</h3>
+
+<h4><a id='redis-auto-reconfig'></a>Auto-Configuration</h4>
+
+<p>You must be using Spring Data Redis 1.0 M4 or later for auto-configuration to work.</p>
+
+<p>Auto-configuration occurs if Cloud Foundry detects a <code>org.springframework.data.redis.connection.RedisConnectionFactory</code> bean in the Spring application context. The following snippet of a Spring XML application context file shows an example of defining this type of bean which Cloud Foundry will detect and potentially auto-configure:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"redis"</span>
+  <span class="na">class=</span><span class="s">"org.springframework.data.redis.connection.jedis.JedisConnectionFactory"</span>
+  <span class="na">p:hostName=</span><span class="s">"localhost"</span> <span class="na">p:port=</span><span class="s">"6379"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<p>Cloud Foundry creates a <code>JedisConnectionFactory</code> with its own values for the following properties: <code>host</code>, <code>port</code>, <code>password</code>. This means that you must package the Jedis JAR in your application. Cloud Foundry does not currently support the JRedis and RJC implementations.</p>
+
+<h4><a id='redis-man-java-reconfig'></a>Manual Configuration in Java</h4>
+
+<p>To configure a Redis service in Java configuration, create a <code>@Configuration</code> class with a <code>@Bean</code> method to return an <code>org.springframework.data.redis.connection.RedisConnectionFactory</code> bean from Spring Data Redis. The bean can be created by helper classes in the <code>spring-cloud</code> library, as shown here:</p>
+<pre class="highlight plaintext"><code>@Configuration
+public class RedisConfig {
+
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory() {
+        CloudFactory cloudFactory = new CloudFactory();
+        Cloud cloud = cloudFactory.getCloud();
+        RedisServiceInfo serviceInfo = (RedisServiceInfo) cloud.getServiceInfo("my-redis");
+        String serviceID = serviceInfo.getID();
+        return cloud.getServiceConnector(serviceID, RedisConnectionFactory.class, null);
+    }
+
+    @Bean
+    public RedisTemplate redisTemplate() {
+        return new StringRedisTemplate(redisConnectionFactory());
+    }
+
+}
+</code></pre>
+
+<h3><a id='rabbitmq'></a>RabbitMQ</h3>
+
+<h4><a id='rabbitmq-auto-reconfig'></a>Auto-Configuration</h4>
+
+<p>You must be using Spring AMQP 1.0 or later for auto-configuration to work. Spring AMQP provides publishing, multi-threaded consumer generation, and message conversion. It also facilitates management of AMQP resources while promoting dependency injection and declarative configuration.</p>
+
+<p>Auto-configuration occurs if Cloud Foundry detects an <code>org.springframework.amqp.rabbit.connection.ConnectionFactory</code> bean in the Spring application context. The following snippet of a Spring application context file shows an example of defining this type of bean which Cloud Foundry will detect and potentially auto-configure:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;rabbit:connection-factory</span>
+    <span class="na">id=</span><span class="s">"rabbitConnectionFactory"</span>
+    <span class="na">host=</span><span class="s">"localhost"</span>
+    <span class="na">password=</span><span class="s">"testpwd"</span>
+    <span class="na">port=</span><span class="s">"1238"</span>
+    <span class="na">username=</span><span class="s">"testuser"</span>
+    <span class="na">virtual-host=</span><span class="s">"virthost"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<p>Cloud Foundry creates an <code>org.springframework.amqp.rabbit.connection.CachingConnectionFactory</code> with its own values for the following properties: <code>host</code>, <code>virtual-host</code>, <code>port</code>, <code>username</code>, <code>password</code>.</p>
+
+<h4><a id='rabbitmq-man-java-reconfig'></a>Manual Configuration in Java</h4>
+
+<p>To configure a RabbitMQ service in Java configuration, create a
+<code>@Configuration</code> class with a <code>@Bean</code> method to return an
+<code>org.springframework.amqp.rabbit.connection.ConnectionFactory</code> bean from the Spring AMQP library. The bean can be created by helper classes in the <code>spring-cloud</code> library, as shown here:</p>
+<pre class="highlight plaintext"><code>@Configuration
+public class RabbitConfig {
+    @Bean
+    public ConnectionFactory rabbitConnectionFactory() {
+        CloudFactory cloudFactory = new CloudFactory();
+        Cloud cloud = cloudFactory.getCloud();
+        AmqpServiceInfo serviceInfo = (AmqpServiceInfo) cloud.getServiceInfo("my-rabbit");
+    String serviceID = serviceInfo.getID();
+    return cloud.getServiceConnector(serviceID, ConnectionFactory.class, null);
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        return new RabbitTemplate(connectionFactory);
+    }
+}
+</code></pre>
+
+        <a id='repo-link' href='http://github.com/cloudfoundry/docs-buildpacks/tree/master/java/spring-service-bindings.html.md.erb'>View the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='/'>Cloud Foundry Documentation</a>
+  &copy; 2016 <a href='http://cloudfoundry.org'>Cloud Foundry Foundation</a>. All Rights Reserved.
+</div>
+<div class="support">
+  <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+</html>

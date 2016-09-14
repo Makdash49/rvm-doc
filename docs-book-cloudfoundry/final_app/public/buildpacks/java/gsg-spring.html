@@ -1,0 +1,1054 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Getting Started Deploying Spring Apps |
+    Cloud Foundry Docs
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="/stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="/javascripts/all.js"></script>
+  <script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22181585-2']);
+  _gaq.push(['_setDomainName', 'cloudfoundry.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>
+
+<!-- CrazyEgg Tracking Script -->
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  setTimeout(function() {
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0020/8294.js?" + Math.floor(new Date().getTime() / 3600000);
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a, b)
+  }, 1);
+}
+</script>
+
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  (function() {
+    var didInit = false;
+
+    function initMunchkin() {
+      if (didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+}
+</script>
+
+
+</head>
+
+<body class="buildpacks buildpacks_java buildpacks_java_gsg-spring has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "cloudfoundry.org";
+    </script>
+
+       
+    <header class="header header-layout">
+      <h1 class="logo">
+        <a href="/">Cloud Foundry Documentation</a>
+      </h1>
+      
+      <div class="header-links js-bar-links">
+        <div class="btn-menu" data-behavior="MenuMobile"></div>
+        
+        <div class="header-item">
+          <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+        </div>
+        <div class="searchbox header-item">
+  <form method="get" action="/search">
+    <input name="q" placeholder="Search" class="search-box" />
+  </form>
+</div>
+
+      </div>
+    </header>
+
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="js-sidenav collapsible nav-container" role="navigation" data-behavior="Collapsible">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul>
+      <li class="has_submenu">
+        <a href="/deploying/index.html">Deploying Cloud Foundry</a>
+        <ul>
+          <li class="has_submenu">
+            <a href="/deploying/aws/index.html">Preparing to Deploy on Amazon Web Services</a>
+            <ul>
+              <li>
+                <a href="/deploying/aws/setup_aws.html">Setting up an AWS Environment for Cloud Foundry with BOSH AWS Bootstrap</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/setup_bosh_aws.html">Deploying BOSH on AWS</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for AWS</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/openstack/index.html">Preparing to Deploy on OpenStack</a>
+            <ul>
+              <li>
+                <a href="/deploying/openstack/validate_openstack.html">Validate your OpenStack Instance</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/security_group.html">Security Group for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/set-up-dns.html">DNS Setup for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/required-flavors.html">Required Instance Flavors for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for OpenStack</a>
+              </li>
+              <li class="has_submenu">
+                <span>Additional OpenStack Configuration</span>
+                <ul>
+                  <li>
+                    <a href="/deploying/openstack/troubleshooting.html">Troubleshooting Cloud Foundry on OpenStack</a>
+                  </li>
+                  <li>
+                    <a href="/deploying/openstack/using_swift_blobstore.html">Using OpenStack Swift as a Cloud Foundry Blobstore</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vsphere/index.html">Preparing to Deploy on vSphere</a>
+            <ul>
+              <li>
+                <a href="https://bosh.io/docs/init-vsphere.html">Initializing BOSH on vSphere</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vSphere</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vcloud/index.html">Preparing to Deploy on vCloud</a>
+            <ul>
+              <li>
+                <a href="/deploying/vcloud/setup_vcloud.html">Setting up vCloud Air or vCloud Virtual Data Center Environment</a>
+              </li>
+              <li>
+                <a href="https://bosh.io/docs/init-vcloud.html">Initializing BOSH on vCloud</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vCloud Air or vCloud Director</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="has_submenu">
+            <a href="/deploying/boshlite/index.html">Preparing to Deploy on BOSH-Lite</a>
+            <ul>
+              <li>
+                <a href="/deploying/boshlite/create_a_manifest.html">Create a Deployment Manifest for Cloud Foundry on BOSH-Lite</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/deploying/common/deploy.html">Deploying Cloud Foundry</a>
+          </li>
+        <li class="has_submenu">
+          <span>Additional Configuration</span>
+          <ul>
+          <li>
+            <a href="/concepts/high-availability.html">High Availability in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/deploying/common/log_drain_blacklists.html">Log Drain Blacklist Configuration</a>
+          </li>
+          <li>
+            <a href="/deploying/common/consul-security.html">Security Configuration for Consul</a>
+          </li>
+          <li>
+            <a href="https://github.com/cloudfoundry-community/cf-services-contrib-release">Deploying Community Services</a>
+          </li>
+          <li>
+            <a href="/deploying/common/cc-blobstore-config.html">Cloud Controller Blobstore Configuration</a>
+          </li>
+          </ul>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Cloud Foundry Command Line Interface (cf CLI)</span>
+        <ul>
+          <li>
+            <a href="/cf-cli/install-go-cli.html">Installing the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/getting-started.html">Getting Started with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/http-proxy.html">Using the cf CLI with an HTTP Proxy Server</a>
+          </li>
+          <li>
+            <a href="/cf-cli/self-signed.html">Using the cf CLI with a Self-Signed Certificate</a>
+          </li>
+          <li>
+            <a href="/cf-cli/use-cli-plugins.html">Using cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/cf-cli/develop-cli-plugins.html">Developing cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-startup.html">About Starting Applications</a>
+          </li>
+          <li>
+            <a href="/cf-cli/cf-help.html">cf CLI Reference Guide</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Develop and Manage Applications
+        </span>
+        <ul>
+          <li>
+            <a href="/devguide/deploy-apps/prepare-to-deploy.html">Considerations for Designing and Running an Application in the Cloud</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/index.html">Understanding Application Deployment</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/deploy-app.html">Deploy an Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/large-app-deploy.html">Deploying a Large Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/manifest.html">Deploying with Application Manifests</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-lifecycle.html">Application Container Lifecycle</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/cf-scale.html">Scaling an Application Using cf scale</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/routes-domains.html">Routes and Domains</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/stacks.html">Changing Stacks</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/environment-variable.html">Cloud Foundry Environment Variables</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/blue-green.html">Using Blue-Green Deployment to Reduce Downtime and Risk</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/streaming-logs.html">Application Logging in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-ssh-overview.html">Application SSH Overview</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-apps.html">Accessing Apps with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-services.html">Accessing Services with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/running/cf-api-endpoint.html">Identifying your Cloud Foundry API Endpoint and Version</a>
+          </li>
+          <li class="has_submenu">
+            <span>Integrating Service Instances with Applications</span>
+            <ul>
+              <li>
+                <a href="/devguide/services/">Services Overview</a>
+              </li>
+              <li>
+                <a href="/devguide/services/application-binding.html">Delivering Service Credentials to an Application</a>
+              </li>
+              <li>
+                <a href="/devguide/services/managing-services.html">Managing Service Instances with the CLI</a>
+              </li>
+              <li>
+                <a href="/devguide/services/service-keys.html">Managing Service Keys</a>
+              </li>
+              <li>
+                <a href="/devguide/services/user-provided.html">User-Provided Service Instances</a>
+              </li>
+              <li>
+                <a href="/devguide/services/route-binding.html">Manage Application Requests with Route Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/play-service-bindings.html">Configuring Play Framework Service Connections</a>
+              </li>
+              <li>
+                <a href="/devguide/services/migrate-db.html">Migrating a Database in Cloud Foundry</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management.html">Streaming Application Logs to Log Management Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management-thirdparty-svc.html">Service-Specific Instructions for Streaming Application Logs</a>
+              </li>
+              <li>
+                <a href="/devguide/services/integrate-splunk.html">Integrating Cloud Foundry with Splunk</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Custom Services
+        </span>
+        <ul>
+          <li>
+            <a href="/services/">Custom Services</a>
+          </li>
+          <li>
+            <a href="/services/overview.html">Overview</a>
+          </li>
+          <li>
+            <a href="/services/api.html">Service Broker API</a>
+          </li>
+          <li>
+            <a href="/services/managing-service-brokers.html">Managing Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/access-control.html">Access Control</a>
+          </li>
+          <li>
+            <a href="/services/catalog-metadata.html">Catalog Metadata</a>
+          </li>
+          <li>
+            <a href="/services/binding-credentials.html">Binding Credentials</a>
+          </li>
+          <li>
+            <a href="/services/dashboard-sso.html">Dashboard Single Sign-On</a>
+          </li>
+          <li>
+            <a href="/services/examples.html">Example Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/app-log-streaming.html">Application Log Streaming</a>
+          </li>
+          <li>
+            <a href="/services/route-services.html">Route Services</a>
+          </li>
+          <li>
+            <a href="/services/supporting-multiple-cf-instances.html">Supporting Multiple Cloud Foundry Instances</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Buildpacks
+        </span>
+        <ul>
+          <li>
+            <a href="/buildpacks/">Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/detection.html">Buildpack Detection</a>
+          </li>
+          <li>
+            <a href="/buildpacks/custom.html">Custom Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/proxy-usage.html">Proxy Usage</a>
+          </li>
+          <li>
+            <a href="/buildpacks/depend-pkg-offline.html">Packaging Dependencies for Offline Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/supported-binary-dependencies.html">Supported Binary Dependencies</a>
+          </li>
+          <li>
+            <a href="/buildpacks/prod-server.html">Configuring a Production Server</a>
+          </li>
+          <li>
+          <a href="/buildpacks/merging_upstream.html">Merging from Upstream Buildpacks</a>
+          </li>
+          <li>
+          <a href="/buildpacks/upgrading_dependency_versions.html">Upgrading Dependency Versions</a>
+         </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/java/index.html">Java Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/java/bosh_custom_trusted_certs.html">BOSH Custom Trusted Certificate Support</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-tips.html">Tips for Java Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/sts.html">Cloud Foundry Eclipse Plugin</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-client.html">Cloud Foundry Java Client Library</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/build-tool-int.html">Build Tool Integration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-grails.html">Getting Started Deploying Grails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-spring.html">Getting Started Deploying Spring Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-ratpack.html">Getting Started Deploying Ratpack Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/grails-service-bindings.html">Configure Service Connections for Grails</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/spring-service-bindings.html">Configure Service Connections for Spring</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/play-service-bindings.html">Configure Service Connections for Play</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/ruby/index.html">
+              Ruby Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/ruby/ruby-tips.html">Tips for Ruby Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ruby.html">Getting Started Deploying Ruby Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ror.html">Getting Started Deploying Ruby on Rails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/sample-ror.html">Deploy a Sample Ruby on Rails App</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rake-config.html">Configure Rake Tasks for Deployed Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-environment.html">Environment Variables Defined by the Ruby Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-service-bindings.html">Configure Service Connections for Ruby</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rvm.html">Mark's Ruby Version Manager Documentation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/node/index.html">Node.js Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/node/node-tips.html">Tips for Node.js Applications</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-environment.html">Environment Variables Defined by the Node Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-service-bindings.html">Configure Service Connections for Node.js</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/binary/index.html">Binary Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/go/index.html">Go Buildpack</a>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/php/index.html">
+              PHP Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/php/gsg-php-usage.html">Deploying and Developing PHP Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-config.html">PHP Buildpack Configuration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-composer.html">Composer</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-sessions.html">Sessions</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-newrelic.html">New Relic</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-tips.html">Tips for PHP Developers</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/python/index.html">Python Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/staticfile/index.html">Staticfile Buildpack</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <a href="/running/">Run and Troubleshoot Cloud Foundry</a>
+        <ul>
+          <li>
+            <a href="/running/managing-cf/logging.html">Cloud Foundry Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/logging-config.html">Configuring System Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/usage-events.html">Usage Events and Billing</a>
+          </li>
+          <li>
+            <a href="/running/config-ssh.html">Configuring SSH Access for Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/monitoring-test.html">Monitoring and Testing Diego Components</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting.html">Troubleshooting Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-apps.html">Troubleshooting Applications</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-warden-services.html">Troubleshooting Wardenized Services</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-diego-windows.html">Troubleshooting Diego for Windows</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Administer Cloud Foundry</span>
+        <ul>
+          <li>
+            <a href="/adminguide/buildpacks.html">Adding Buildpacks to Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/manage-domains-routes.html">Managing Domains and Routes</a>
+          </li>
+          <li>
+            <a href="/adminguide/cli-user-management.html">Creating and Managing Users with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/adminguide/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a>
+          </li>
+          <li>
+            <a href="/adminguide/quota-plans.html">Creating and Modifying Quota Plans</a>
+          </li>
+          <li>
+            <a href="/adminguide/notifications.html">Getting Started with the Notifications Service</a>
+          </li>
+          <li>
+            <a href="/adminguide/app-sec-groups.html">Application Security Groups</a>
+          </li>
+          <li>
+            <a href="/adminguide/listing-feature-flags.html">Feature Flags</a>
+          </li>
+          <li>
+            <a href="/adminguide/enabling_ipv6.html">Enabling IPv6 for Hosted Applications</a>
+          </li>
+          <li>
+            <a href="/adminguide/securing-traffic.html">Securing Traffic into Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/apps-enable-diego.html">Migrating Apps to Diego</a>
+          </li>
+          <li>
+            <a href="/adminguide/hm-notifications.html">Configuring Health Monitor Notifications</a>
+          </li>
+          <li>
+            <a href="/adminguide/supporting-websockets.html">Supporting WebSockets</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Cloud Foundry Concepts
+        </span>
+        <ul>
+          <!--
+            <li>
+            <a href="/concepts/index.html">Cloud Foundry Concepts (landing)</a>
+            </li>
+          -->
+          </li>
+          <li>
+            <a href="/concepts/overview.html">Cloud Foundry Overview</a>
+          </li>
+          <li>
+            <a href="/concepts/architecture/">Cloud Foundry Components</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-architecture.html">Diego Architecture</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/dea-vs-diego.html">Differences Between DEA and Diego Architectures</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-auction.html">How the Diego Auction Allocates Jobs</a>
+          </li>
+          <li>
+            <a href="/concepts/how-applications-are-staged.html">How Applications Are Staged</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/ssh-conceptual.html">Understanding Application SSH</a>
+          </li>
+          <li>
+            <a href="/concepts/roles.html">Orgs, Spaces, Roles, and Permissions</a>
+          </li>
+          <li>
+            <a href="/concepts/security.html">Cloud Foundry Security</a>
+          </li>
+            <li>
+            <a href="/concepts/http-routing.html">HTTP Routing</a>
+          </li>
+          <li>
+            <a href="/concepts/stacks.html">Stacks</a>
+          </li>
+          <li>
+            <a href="/concepts/docker.html">Using Docker in Cloud Foundry</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="has_submenu">
+        <span>
+          Logging and Metrics in Cloud Foundry
+        </span>
+        <ul>
+          <li>
+            <a href="/loggregator/architecture.html">Overview of the Loggregator System</a>
+          </li>
+          <li>
+            <a href="/loggregator/cli-plugin.html">Installing the Loggregator Plugin for CF CLI</a>
+          </li>
+          <li>
+            <a href="/loggregator/cc-uaa-logging.html">Security Event Logging for Cloud Controller and UAA</a>
+          </li>
+          <li>
+            <a href="/loggregator/all_metrics.html">Cloud Foundry Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/dea-metrics.html">DEA Architecture Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/log-ops-guide.html">Loggregator Guide for Cloud Foundry Operators</a>
+          </li>
+          <li>
+            <a href="/loggregator/data-sources.html">Cloud Foundry Data Sources</a>
+          </li>
+          <li>
+            <a href="/loggregator/nozzle-tutorial.html">Deploying a Nozzle to the Loggregator Firehose</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/api/uaa/index.html">UAA API</a>
+      </li>
+      <li>
+        <a href="http://bosh.io/docs/">BOSH</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container" >
+    Getting Started Deploying Spring Apps
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li><a href="#deploy-yourapp">Deploy a Spring Application</a></li>
+<li><a href="#alternative">Alternative Methods for Pushing Apps</a></li>
+<li><a href="#cli-manage">Manage Your Application with the cf CLI</a></li>
+<li><a href="#troubleshoot">Troubleshooting</a></li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p><strong></strong></p>
+
+<p>This guide is intended to walk you through deploying a Spring app to Cloud Foundry. You can choose whether to push a sample app, your own app, or both.</p>
+
+<p>If at any time you experience a problem following the steps below, try checking the <a href="http://docs.cloudfoundry.org/running/troubleshooting.html">Troubleshooting Cloud Foundry</a> topic, or refer to the <a href="./../../devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a> topic for more tips.</p>
+
+<p class="tip"><strong>Sample App Step</strong><br />If you want to go through this tutorial using the sample app, run <code>git clone https://github.com/cloudfoundry-samples/pong_matcher_spring</code> to clone the <code>pong_matcher_spring</code> app from GitHub, and follow the instructions in the Sample App Step sections.</p>
+
+<p class="note"><strong>Note</strong>: Ensure that your Spring app runs locally before continuing with this procedure.</p>
+
+<h2><a id='deploy-yourapp'></a>Deploy a Spring Application</h2>
+
+<p>This section describes how to deploy your Spring application to Cloud Foundry.</p>
+
+<h3>Prerequisites</h3>
+
+<ul>
+<li>A Spring app that runs locally on your workstation</li>
+<li>Intermediate to advanced Spring knowledge</li>
+<li>The <a href="../../cf-cli/install-go-cli.html">Cloud Foundry Command Line Interface (cf CLI)</a></li>
+<li>JDK 1.6, 1.7, or 1.8 for Java 6, 7, or 8 configured on your workstation</li>
+</ul>
+
+<p class="note"><strong>Note</strong>: The Cloud Foundry Java buildpack uses JDK 1.8, but you can modify the buildpack and the manifest for your app to compile to an earlier version. For more information, refer to the <a href="../custom.html">Custom Buildpacks</a> topic.</p>
+
+<h3>Step 1: Declare App Dependencies</h3>
+
+<p>Be sure to declare all the dependency tasks for your app in the build script of your chosen build tool.</p>
+
+<p>The <a href="https://spring.io/guides">Spring Getting Started Guides</a> demonstrate features and functionality you can add to your app, such as consuming RESTful services or integrating data. These guides contain Gradle and Maven build script examples with dependencies. You can copy the code for the dependencies into your build script.</p>
+
+<p>The table lists build script information for Gradle and Maven and provides documentation links for each build tool.</p>
+
+<table border="1" class="nice">
+<tr>
+  <th><strong>Build Tool</strong></th>
+  <th><strong>Build Script</strong></th>
+  <th><strong>Documentation</strong></th>
+</tr>
+<tr>
+  <td>Gradle</td>
+  <td><code>build.gradle</code></td>
+  <td><a href="http://www.gradle.org/docs/current/userguide/userguide.html">Gradle User Guide</a></td>
+</tr>
+<tr>
+  <td>Maven</td>
+  <td><code>pom.xml</code></td>
+  <td><a href="http://maven.apache.org/guides/">Apache Maven Project Documentation</a></td>
+</tr>
+</table>
+
+<p class="tip"><strong>Sample App Step</strong><br />You can skip this step. The <code>pom.xml</code> file contains the dependencies for the <code>pong_matcher_spring</code> sample app, as the example below shows.
+</p>
+<pre class="highlight plaintext"><code>
+</code></pre>
+
+<h3>Step 2: Allocate Sufficient Memory</h3>
+
+<p>Use the <code>cf push -m</code> command to specify the amount of memory that should be allocated to the application. Memory allocated this way is done in preset amounts of <code>64M</code>, <code>128M</code>, <code>256M</code>, <code>512M</code>, <code>1G</code>, or <code>2G</code>. For example:</p>
+<pre class="highlight plaintext"><code>$ cf push -m 128M
+</code></pre>
+
+<p>When your app is running, you can use the <code>cf app APP-NAME</code> command to see memory utilization.</p>
+
+<p class="tip"><strong>Sample App Step</strong><br />You can skip this step. The Cloud Foundry Java buildpack uses settings declared in the sample app to allocate 1 GB of memory to the app.</p>
+
+<h3>Step 3: Provide a JDBC Driver</h3>
+
+<p>The Java buildpack does not bundle a JDBC driver with your application. If your application accesses a SQL RDBMS, you must do the following:</p>
+
+<ul>
+<li>Include the appropriate driver in your application.</li>
+<li>Create a dependency task for the driver in the build script for your build tool or IDE.</li>
+</ul>
+
+<p class="tip"><strong>Sample App Step</strong><br />You can skip this step. In the <code>pong_matcher_spring</code> sample app, the <code>src/main/resources/application.yml</code> file declares the JDBC driver, and the <code>pom.xml</code> file includes the JDBC driver as a dependency.</p>
+
+<h3>Step 4: Configure Service Connections for a Spring App</h3>
+
+<p>Cloud Foundry provides extensive support for creating and binding a Spring application to services such as MySQL, PostgreSQL, MongoDB, Redis, and RabbitMQ. For more information about creating and binding a service connection for your app, refer to the <a href="/buildpacks/java/spring-service-bindings.html">Configure Service Connections for Spring</a> topic.</p>
+
+<p class="tip"><strong>Sample App Step: Create a Service Instance</strong><br />Run <code>cf create-service cleardb spark mysql</code>. This creates a service instance named <code>mysql</code> that uses the <code>cleardb</code> service and the <code>mysql</code> plan, as the example below shows.
+
+<pre class="terminal">
+$ cf create-service cleardb spark mysql
+Creating service mysql in org Cloud-Apps / space development as a.user@example.com....
+OK
+</pre>
+
+<p class="tip"><strong>Sample App Step: Bind a Service Instance</strong><br />You can skip this step because the service instance is already bound. Open the <code>manifest.yml</code> file in a text editor to view the bound service instance information. Locate the file in the app root directory and search for the <code>services</code> sub-block in the <code>applications</code> block, as the example below shows.
+
+<pre class="code">
+---
+applications:
+...
+  services:
+    - mysql
+</pre>
+</p>
+
+<h3>Step 5: Configure the Deployment Manifest</h3>
+
+<p>You can specify deployment options in a manifest file <code>manifest.yml</code> that the <code>cf push</code> command uses when deploying your app.</p>
+
+<p>Refer to the <a href="../../devguide/deploy-apps/manifest.html">Deploying with Application Manifests</a> topic for more information.</p>
+
+<p class="tip"><strong>Sample App Step</strong><br />You can skip this step. The <code>manifest.yml</code> file for the <code>pong_matcher_spring</code> sample app does not require any additional configuration to deploy the app.</p>
+
+<h3>Step 6: Log in and Target the API Endpoint</h3>
+
+<p>Run <code>cf login -a API-ENDPOINT</code>, enter your login credentials, and select a space and org. The API endpoint is <a href="http://docs.cloudfoundry.org/running/cf-api-endpoint.html">the URL of the Cloud Controller in your Cloud Foundry instance</a>.</p>
+
+<p><p class="tip"><strong>Sample App Step</strong><br />You must do this step to run the sample app.</p></p>
+
+<h3>Step 7: Deploy Your Application</h3>
+
+<p class="note"><strong>Note</strong>: You must use the cf CLI to deploy apps.</p>
+
+<p>From the root directory of your application, run <code>cf push APP-NAME -p PATH-TO-FILE.war</code> to deploy your application.</p>
+
+<p class="note"><strong>Note</strong>: Most Spring apps include an artifact, such as a <code>.jar</code>, <code>.war</code>, or <code>.zip</code> file. You must include the path to this file in the <code>cf push</code> command using the <code>-p</code> option if you do not declare the path in the <code>applications</code> block of the manifest file. The example shows how to specify a path to the <code>.war</code> file for a Spring app. Refer to the <a href="./java-tips.html">Tips for Java Developers</a> topic for CLI examples for specific build tools, frameworks, and languages that create an app with an artifact.</p>
+
+<p><code>cf push APP-NAME</code> creates a URL route to your application in the form HOST.DOMAIN, where HOST is your APP-NAME and DOMAIN is specified by your administrator. Your DOMAIN is<code>shared-domain.example.com</code>. For example: <code>cf push my-app</code> creates the URL <code>my-app.shared-domain.example.com</code>.</p>
+
+<p>The URL for your app must be unique from other apps that Cloud Foundry hosts or the push will fail. Use the following options to help create a unique URL:</p>
+
+<ul>
+<li><code>-n</code> to assign a different HOST name for the app</li>
+<li><code>--random-route</code> to create a URL that includes the app name and random words</li>
+<li><code>cf help push</code> to view other options for this command</li>
+</ul>
+
+<p>If you want to view log activity while the app deploys, launch a new terminal window and run <code>cf logs APP-NAME</code>.</p>
+
+<p>Once your app deploys, browse to your app URL. Search for the <code>urls</code> field in the <code>App started</code> block in the output of the <code>cf push</code> command. Use the URL to access your app online.</p>
+
+<p class="tip"><strong>Sample App Step</strong><br />
+1. Run <code>brew install maven</code>.
+<br />
+2. Change to the <code>app</code>directory, and run <code>mvn package</code> to build the app.
+<br />
+3. Run <code>cf push pong_matcher_spring -n HOSTNAME</code> to push the app.
+<br /><br />
+Example: <code>cf push pong_matcher_spring -n my-spring-app</code>
+</p>
+
+<p class="note"><strong>Note</strong>: You do not have to include the <code>-p</code> flag when you deploy the sample app. The sample app manifest declares the path to the archive that <code>cf push</code> uses to upload the app files.
+</p>
+
+<p>The example below shows the terminal output of deploying the <code>pong_matcher_spring</code> app. <code>cf push</code> uses the instructions in the manifest file to create the app, create and bind the route, and upload the app. It then binds the app to the <code>mysql</code> service and starts one instance of the app with 1 GB of memory. After the app starts, the output displays the health and status of the app.</p>
+
+<pre class="terminal">
+$ cf push pong_matcher_spring -n spring1119
+Using manifest file /Users/example/workspace/pong_matcher_spring/manifest.yml
+
+Creating app pong_matcher_spring in org Cloud-Apps / space development as a.user@example.com...
+OK
+
+Creating route spring1119.cfapps.io...
+OK
+
+Binding spring1119.cfapps.io to pong_matcher_spring...
+OK
+
+Uploading pong_matcher_spring...
+Uploading app files from: /Users/example/workspace/pong_matcher_spring/target/pong-matcher-spring-1.0.0.BUILD-SNAPSHOT.jar
+Uploading 797.5K, 116 files
+OK
+Binding service mysql to app pong_matcher_spring in org Cloud-Apps / space development as a.user@example.com...
+OK
+
+Starting app pong_matcher_spring in org Cloud-Apps / space development as a.user@example.com...
+OK
+-----> Downloaded app package (25M)
+-----> Downloading Open Jdk JRE 1.8.0_25 from https://download.run.pivotal.io/openjdk/lucid/x86_64/openjdk-1.8.0_25.tar.gz (1.2s)
+       Expanding Open Jdk JRE to .java-buildpack/open_jdk_jre (1.1s)
+-----> Downloading Spring Auto Reconfiguration 1.5.0_RELEASE from https://download.run.pivotal.io/auto-reconfiguration/auto-reconfiguration-1.5.0_RELEASE.jar (0.1s)
+
+-----> Uploading droplet (63M)
+
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+
+App started
+
+Showing health and status for app pong_matcher_spring in org Cloud-Apps / space development as a.user@example.com...
+OK
+
+requested state: started
+instances: 1/1
+usage: 1G x 1 instances
+urls: spring1119.cfapps.io
+
+     state     since                    cpu    memory         disk
+#0   running   2014-11-19 12:29:27 PM   0.0%   553.6M of 1G   127.4M of 1G
+</pre>
+
+<h3>Step 8: Test Your Deployed App</h3>
+
+<p>You’ve deployed an app to Cloud Foundry!</p>
+
+<p>Use the cf CLI to review information and administer your app and your Cloud Foundry account. For example, you can edit the <code>manifest.yml</code> to increase the number of app instances from 1 to 3, and redeploy the app with a new app name and host name.</p>
+
+<p>See the <a href="#cli-manage">Manage Your Application with the cf CLI</a> section for more information. </p>
+
+<p class="tip"><strong>Sample App Step</strong><br />
+To test the sample app, do the following:
+<br /><br />
+1. To export the test host, run <code>export HOST=SAMPLE-APP-URL</code>, substituting the URL for your app for <code>SAMPLE-APP-URL</code>.
+<br /><br />
+2. To clear the database from any previous tests, run:
+<br />
+<code>curl -v -X DELETE $HOST/all</code>
+<br />
+You should get a response of <code:>200</code>.
+<br /><br />
+3. To request a match as &ldquo;andrew&rdquo;, run:
+<br />
+<code>curl -v -H "Content-Type: application/json" -X PUT $HOST/match_requests/firstrequest -d '{"player": "andrew"}'</code>
+<br />
+You should again get a response of <code>200</code>.
+<br /><br />
+4. To request a match as a different player, run:
+<br />
+<code>curl -v -H "Content-Type: application/json" -X PUT $HOST/match_requests/secondrequest -d '{"player": "navratilova"}'</code>
+<br /><br />
+5. To check the status of the first match request, run:
+<br />
+<code>curl -v -X GET $HOST/match_requests/firstrequest</code>
+<br />
+The last line of the output shows the <code>match_id</code>.
+<br /><br />
+6. Replace <code>MATCH_ID</code> with the <code>match_id</code> value from the previous step in the following command:
+<br />
+<code>curl -v -H "Content-Type: application/json" -X POST $HOST/results -d '
+{
+    "match_id":"MATCH_ID",
+    "winner":"andrew",
+    "loser":"navratilova"
+}'</code>
+<br />
+You should receive a <code>201 Created</code> response.
+</p>
+
+<h2><a id='alternative'></a>Alternative Methods for Pushing Apps</h2>
+
+<h3>Alternative Method 1: Integrate a Plugin for Your Build Tool</h3>
+
+<p>Cloud Foundry provides plugins for Maven and Gradle. You can deploy and manage your apps using Maven or Gradle command-line syntax and configure security credentials.</p>
+
+<p>For more information, refer to the <a href="/buildpacks/java/build-tool-int.html">Build Tool Integration</a> topic.</p>
+
+<h3>Alternative Method 2: Integrate the Cloud Foundry Eclipse Plugin for STS</h3>
+
+<p>Cloud Foundry provides an Eclipse plugin extension that enables you to
+deploy and manage Spring applications on a Cloud Foundry instance from the
+Spring Tool Suite (STS), version 3.0.0 and later.
+For more information, refer to the <a href="/buildpacks/java/sts.html">Cloud Foundry Eclipse Plugin</a>
+topic.
+You must follow the instructions in the <a href="/buildpacks/java/sts.html#install-to-sts">Install to STS from the IDE Extensions Tab</a> and <a href="/buildpacks/java/sts.html#cloud-foundry-server">Create a Cloud Foundry Server</a> sections before you can deploy and
+manage your apps with the plugin.</p>
+
+<h2><a id='cli-manage'></a>Manage Your Application with the cf CLI</h2>
+
+<p>Run <code>cf help</code> to view a complete list of commands, grouped by task categories, and run <code>cf help COMMAND</code> for detailed information about a specific command. For more information about using the cf CLI, refer to the Cloud Foundry Command Line Interface (cf CLI) topics, especially the <a href="http://docs.cloudfoundry.org/cf-cli/getting-started.html">Getting Started with the cf CLI</a> topic.</p>
+
+<p class="note"><strong>Note</strong>: You cannot perform certain tasks in the CLI because these are commands that only a Cloud Foundry administrator can run. If you are not a Cloud Foundry administrator, the following message displays for these types of commands:
+
+<code>error code: 10003, message: You are not authorized to perform the requested action</code>
+
+
+</p>
+
+<h2><a id='troubleshoot'></a>Troubleshooting</h2>
+
+<p>If your application fails to start, verify that the application starts in your local environment. Refer to the <a href="./../../devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a> topic to learn more about troubleshooting.</p>
+
+<h3>App Deploy Fails</h3>
+
+<p>Even when the deploy fails, the app might exist on Cloud Foundry. Run <code>cf apps</code> to review the apps in the currently targeted org and space. You might be able to correct the issue using the CLI, or you might have to delete the app and redeploy.</p>
+
+<h3>App Requires a Content-Type</h3>
+
+<p>If you specify a <code>Content-Encoding</code> header of <code>gzip</code> but do not specify a <code>Content-Type</code> within your application, Cloud Foundry might send a <code>Content-Type</code> of <code>application/x-gzip</code> to the browser. This scenario might cause the deploy to fail if it conflicts with the actual encoded content of your app. To avoid this issue, be sure to explicitly set <code>Content-Type</code> within your app.</p>
+
+<h3>App Requires a Unique URL</h3>
+
+<p>Cloud Foundry requires that each app that you deploy have a unique URL. Otherwise, the new app URL collides with an existing app URL and Cloud Foundry cannot successfully deploy the app. You can fix this issue by running <code>cf push</code> with either of the following flags to create a unique URL:</p>
+
+<ul>
+<li><code>-n</code> to assign a different HOST name for the app.</li>
+<li><code>--random-route</code> to create a URL that includes the app name and random words. Using this option might create a long URL, depending on the number of words that the app name includes.</li>
+</ul>
+
+        <a id='repo-link' href='http://github.com/cloudfoundry/docs-buildpacks/tree/master/java/gsg-spring.html.md.erb'>View the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='/'>Cloud Foundry Documentation</a>
+  &copy; 2016 <a href='http://cloudfoundry.org'>Cloud Foundry Foundation</a>. All Rights Reserved.
+</div>
+<div class="support">
+  <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+</html>
