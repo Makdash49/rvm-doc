@@ -1,0 +1,1023 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Upgrading Dependency Versions |
+    Cloud Foundry Docs
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="/stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="/javascripts/all.js"></script>
+  <script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22181585-2']);
+  _gaq.push(['_setDomainName', 'cloudfoundry.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>
+
+<!-- CrazyEgg Tracking Script -->
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  setTimeout(function() {
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0020/8294.js?" + Math.floor(new Date().getTime() / 3600000);
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a, b)
+  }, 1);
+}
+</script>
+
+<script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  (function() {
+    var didInit = false;
+
+    function initMunchkin() {
+      if (didInit === false) {
+        didInit = true;
+        Munchkin.init('625-IUJ-009');
+      }
+    }
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = document.location.protocol + '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+}
+</script>
+
+
+</head>
+
+<body class="buildpacks buildpacks_upgrading_dependency_versions has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "cloudfoundry.org";
+    </script>
+
+       
+    <header class="header header-layout">
+      <h1 class="logo">
+        <a href="/">Cloud Foundry Documentation</a>
+      </h1>
+      
+      <div class="header-links js-bar-links">
+        <div class="btn-menu" data-behavior="MenuMobile"></div>
+        
+        <div class="header-item">
+          <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+        </div>
+        <div class="searchbox header-item">
+  <form method="get" action="/search">
+    <input name="q" placeholder="Search" class="search-box" />
+  </form>
+</div>
+
+      </div>
+    </header>
+
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="js-sidenav collapsible nav-container" role="navigation" data-behavior="Collapsible">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul>
+      <li class="has_submenu">
+        <a href="/deploying/index.html">Deploying Cloud Foundry</a>
+        <ul>
+          <li class="has_submenu">
+            <a href="/deploying/aws/index.html">Preparing to Deploy on Amazon Web Services</a>
+            <ul>
+              <li>
+                <a href="/deploying/aws/setup_aws.html">Setting up an AWS Environment for Cloud Foundry with BOSH AWS Bootstrap</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/setup_bosh_aws.html">Deploying BOSH on AWS</a>
+              </li>
+              <li>
+                <a href="/deploying/aws/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for AWS</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/openstack/index.html">Preparing to Deploy on OpenStack</a>
+            <ul>
+              <li>
+                <a href="/deploying/openstack/validate_openstack.html">Validate your OpenStack Instance</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/security_group.html">Security Group for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/set-up-dns.html">DNS Setup for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/required-flavors.html">Required Instance Flavors for Cloud Foundry on OpenStack</a>
+              </li>
+              <li>
+                <a href="/deploying/openstack/cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for OpenStack</a>
+              </li>
+              <li class="has_submenu">
+                <span>Additional OpenStack Configuration</span>
+                <ul>
+                  <li>
+                    <a href="/deploying/openstack/troubleshooting.html">Troubleshooting Cloud Foundry on OpenStack</a>
+                  </li>
+                  <li>
+                    <a href="/deploying/openstack/using_swift_blobstore.html">Using OpenStack Swift as a Cloud Foundry Blobstore</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vsphere/index.html">Preparing to Deploy on vSphere</a>
+            <ul>
+              <li>
+                <a href="https://bosh.io/docs/init-vsphere.html">Initializing BOSH on vSphere</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vSphere</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/deploying/vcloud/index.html">Preparing to Deploy on vCloud</a>
+            <ul>
+              <li>
+                <a href="/deploying/vcloud/setup_vcloud.html">Setting up vCloud Air or vCloud Virtual Data Center Environment</a>
+              </li>
+              <li>
+                <a href="https://bosh.io/docs/init-vcloud.html">Initializing BOSH on vCloud</a>
+              </li>
+              <li>
+                <a href="/deploying/common/vsphere-vcloud-cf-stub.html">Customizing the Cloud Foundry Deployment Manifest for vCloud Air or vCloud Director</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="has_submenu">
+            <a href="/deploying/boshlite/index.html">Preparing to Deploy on BOSH-Lite</a>
+            <ul>
+              <li>
+                <a href="/deploying/boshlite/create_a_manifest.html">Create a Deployment Manifest for Cloud Foundry on BOSH-Lite</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/deploying/common/deploy.html">Deploying Cloud Foundry</a>
+          </li>
+        <li class="has_submenu">
+          <span>Additional Configuration</span>
+          <ul>
+          <li>
+            <a href="/concepts/high-availability.html">High Availability in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/deploying/common/log_drain_blacklists.html">Log Drain Blacklist Configuration</a>
+          </li>
+          <li>
+            <a href="/deploying/common/consul-security.html">Security Configuration for Consul</a>
+          </li>
+          <li>
+            <a href="https://github.com/cloudfoundry-community/cf-services-contrib-release">Deploying Community Services</a>
+          </li>
+          <li>
+            <a href="/deploying/common/cc-blobstore-config.html">Cloud Controller Blobstore Configuration</a>
+          </li>
+          </ul>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Cloud Foundry Command Line Interface (cf CLI)</span>
+        <ul>
+          <li>
+            <a href="/cf-cli/install-go-cli.html">Installing the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/getting-started.html">Getting Started with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/cf-cli/http-proxy.html">Using the cf CLI with an HTTP Proxy Server</a>
+          </li>
+          <li>
+            <a href="/cf-cli/self-signed.html">Using the cf CLI with a Self-Signed Certificate</a>
+          </li>
+          <li>
+            <a href="/cf-cli/use-cli-plugins.html">Using cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/cf-cli/develop-cli-plugins.html">Developing cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-startup.html">About Starting Applications</a>
+          </li>
+          <li>
+            <a href="/cf-cli/cf-help.html">cf CLI Reference Guide</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Develop and Manage Applications
+        </span>
+        <ul>
+          <li>
+            <a href="/devguide/deploy-apps/prepare-to-deploy.html">Considerations for Designing and Running an Application in the Cloud</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/index.html">Understanding Application Deployment</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/deploy-app.html">Deploy an Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/large-app-deploy.html">Deploying a Large Application</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/manifest.html">Deploying with Application Manifests</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-lifecycle.html">Application Container Lifecycle</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/cf-scale.html">Scaling an Application Using cf scale</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/routes-domains.html">Routes and Domains</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/stacks.html">Changing Stacks</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/environment-variable.html">Cloud Foundry Environment Variables</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/blue-green.html">Using Blue-Green Deployment to Reduce Downtime and Risk</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/streaming-logs.html">Application Logging in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/app-ssh-overview.html">Application SSH Overview</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-apps.html">Accessing Apps with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/devguide/deploy-apps/ssh-services.html">Accessing Services with Diego SSH</a>
+          </li>
+          <li>
+            <a href="/running/cf-api-endpoint.html">Identifying your Cloud Foundry API Endpoint and Version</a>
+          </li>
+          <li class="has_submenu">
+            <span>Integrating Service Instances with Applications</span>
+            <ul>
+              <li>
+                <a href="/devguide/services/">Services Overview</a>
+              </li>
+              <li>
+                <a href="/devguide/services/application-binding.html">Delivering Service Credentials to an Application</a>
+              </li>
+              <li>
+                <a href="/devguide/services/managing-services.html">Managing Service Instances with the CLI</a>
+              </li>
+              <li>
+                <a href="/devguide/services/service-keys.html">Managing Service Keys</a>
+              </li>
+              <li>
+                <a href="/devguide/services/user-provided.html">User-Provided Service Instances</a>
+              </li>
+              <li>
+                <a href="/devguide/services/route-binding.html">Manage Application Requests with Route Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/play-service-bindings.html">Configuring Play Framework Service Connections</a>
+              </li>
+              <li>
+                <a href="/devguide/services/migrate-db.html">Migrating a Database in Cloud Foundry</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management.html">Streaming Application Logs to Log Management Services</a>
+              </li>
+              <li>
+                <a href="/devguide/services/log-management-thirdparty-svc.html">Service-Specific Instructions for Streaming Application Logs</a>
+              </li>
+              <li>
+                <a href="/devguide/services/integrate-splunk.html">Integrating Cloud Foundry with Splunk</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Custom Services
+        </span>
+        <ul>
+          <li>
+            <a href="/services/">Custom Services</a>
+          </li>
+          <li>
+            <a href="/services/overview.html">Overview</a>
+          </li>
+          <li>
+            <a href="/services/api.html">Service Broker API</a>
+          </li>
+          <li>
+            <a href="/services/managing-service-brokers.html">Managing Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/access-control.html">Access Control</a>
+          </li>
+          <li>
+            <a href="/services/catalog-metadata.html">Catalog Metadata</a>
+          </li>
+          <li>
+            <a href="/services/binding-credentials.html">Binding Credentials</a>
+          </li>
+          <li>
+            <a href="/services/dashboard-sso.html">Dashboard Single Sign-On</a>
+          </li>
+          <li>
+            <a href="/services/examples.html">Example Service Brokers</a>
+          </li>
+          <li>
+            <a href="/services/app-log-streaming.html">Application Log Streaming</a>
+          </li>
+          <li>
+            <a href="/services/route-services.html">Route Services</a>
+          </li>
+          <li>
+            <a href="/services/supporting-multiple-cf-instances.html">Supporting Multiple Cloud Foundry Instances</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Buildpacks
+        </span>
+        <ul>
+          <li>
+            <a href="/buildpacks/">Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/detection.html">Buildpack Detection</a>
+          </li>
+          <li>
+            <a href="/buildpacks/custom.html">Custom Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/proxy-usage.html">Proxy Usage</a>
+          </li>
+          <li>
+            <a href="/buildpacks/depend-pkg-offline.html">Packaging Dependencies for Offline Buildpacks</a>
+          </li>
+          <li>
+            <a href="/buildpacks/supported-binary-dependencies.html">Supported Binary Dependencies</a>
+          </li>
+          <li>
+            <a href="/buildpacks/prod-server.html">Configuring a Production Server</a>
+          </li>
+          <li>
+          <a href="/buildpacks/merging_upstream.html">Merging from Upstream Buildpacks</a>
+          </li>
+          <li>
+          <a href="/buildpacks/upgrading_dependency_versions.html">Upgrading Dependency Versions</a>
+         </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/java/index.html">Java Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/java/bosh_custom_trusted_certs.html">BOSH Custom Trusted Certificate Support</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-tips.html">Tips for Java Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/sts.html">Cloud Foundry Eclipse Plugin</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/java-client.html">Cloud Foundry Java Client Library</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/build-tool-int.html">Build Tool Integration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-grails.html">Getting Started Deploying Grails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-spring.html">Getting Started Deploying Spring Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/gsg-ratpack.html">Getting Started Deploying Ratpack Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/grails-service-bindings.html">Configure Service Connections for Grails</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/spring-service-bindings.html">Configure Service Connections for Spring</a>
+              </li>
+              <li>
+                <a href="/buildpacks/java/play-service-bindings.html">Configure Service Connections for Play</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/ruby/index.html">
+              Ruby Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/ruby/ruby-tips.html">Tips for Ruby Developers</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ruby.html">Getting Started Deploying Ruby Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/gsg-ror.html">Getting Started Deploying Ruby on Rails Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/sample-ror.html">Deploy a Sample Ruby on Rails App</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rake-config.html">Configure Rake Tasks for Deployed Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-environment.html">Environment Variables Defined by the Ruby Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/ruby-service-bindings.html">Configure Service Connections for Ruby</a>
+              </li>
+              <li>
+                <a href="/buildpacks/ruby/rvm.html">Mark's Ruby Version Manager Documentation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/node/index.html">Node.js Buildpack</a>
+            <ul>
+              <li>
+                <a href="/buildpacks/node/node-tips.html">Tips for Node.js Applications</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-environment.html">Environment Variables Defined by the Node Buildpack</a>
+              </li>
+              <li>
+                <a href="/buildpacks/node/node-service-bindings.html">Configure Service Connections for Node.js</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/binary/index.html">Binary Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/go/index.html">Go Buildpack</a>
+          </li>
+          <li class="has_submenu">
+            <a href="/buildpacks/php/index.html">
+              PHP Buildpack
+            </a>
+            <ul>
+              <li>
+                <a href="/buildpacks/php/gsg-php-usage.html">Deploying and Developing PHP Apps</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-config.html">PHP Buildpack Configuration</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-composer.html">Composer</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-sessions.html">Sessions</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-newrelic.html">New Relic</a>
+              </li>
+              <li>
+                <a href="/buildpacks/php/gsg-php-tips.html">Tips for PHP Developers</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/buildpacks/python/index.html">Python Buildpack</a>
+          </li>
+          <li>
+            <a href="/buildpacks/staticfile/index.html">Staticfile Buildpack</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <a href="/running/">Run and Troubleshoot Cloud Foundry</a>
+        <ul>
+          <li>
+            <a href="/running/managing-cf/logging.html">Cloud Foundry Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/logging-config.html">Configuring System Logging</a>
+          </li>
+          <li>
+            <a href="/running/managing-cf/usage-events.html">Usage Events and Billing</a>
+          </li>
+          <li>
+            <a href="/running/config-ssh.html">Configuring SSH Access for Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/monitoring-test.html">Monitoring and Testing Diego Components</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting.html">Troubleshooting Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-apps.html">Troubleshooting Applications</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-warden-services.html">Troubleshooting Wardenized Services</a>
+          </li>
+          <li>
+            <a href="/running/troubleshooting/troubleshooting-diego-windows.html">Troubleshooting Diego for Windows</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Administer Cloud Foundry</span>
+        <ul>
+          <li>
+            <a href="/adminguide/buildpacks.html">Adding Buildpacks to Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/manage-domains-routes.html">Managing Domains and Routes</a>
+          </li>
+          <li>
+            <a href="/adminguide/cli-user-management.html">Creating and Managing Users with the cf CLI</a>
+          </li>
+          <li>
+            <a href="/adminguide/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a>
+          </li>
+          <li>
+            <a href="/adminguide/quota-plans.html">Creating and Modifying Quota Plans</a>
+          </li>
+          <li>
+            <a href="/adminguide/notifications.html">Getting Started with the Notifications Service</a>
+          </li>
+          <li>
+            <a href="/adminguide/app-sec-groups.html">Application Security Groups</a>
+          </li>
+          <li>
+            <a href="/adminguide/listing-feature-flags.html">Feature Flags</a>
+          </li>
+          <li>
+            <a href="/adminguide/enabling_ipv6.html">Enabling IPv6 for Hosted Applications</a>
+          </li>
+          <li>
+            <a href="/adminguide/securing-traffic.html">Securing Traffic into Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="/adminguide/apps-enable-diego.html">Migrating Apps to Diego</a>
+          </li>
+          <li>
+            <a href="/adminguide/hm-notifications.html">Configuring Health Monitor Notifications</a>
+          </li>
+          <li>
+            <a href="/adminguide/supporting-websockets.html">Supporting WebSockets</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Cloud Foundry Concepts
+        </span>
+        <ul>
+          <!--
+            <li>
+            <a href="/concepts/index.html">Cloud Foundry Concepts (landing)</a>
+            </li>
+          -->
+          </li>
+          <li>
+            <a href="/concepts/overview.html">Cloud Foundry Overview</a>
+          </li>
+          <li>
+            <a href="/concepts/architecture/">Cloud Foundry Components</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-architecture.html">Diego Architecture</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/dea-vs-diego.html">Differences Between DEA and Diego Architectures</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/diego-auction.html">How the Diego Auction Allocates Jobs</a>
+          </li>
+          <li>
+            <a href="/concepts/how-applications-are-staged.html">How Applications Are Staged</a>
+          </li>
+          <li>
+            <a href="/concepts/diego/ssh-conceptual.html">Understanding Application SSH</a>
+          </li>
+          <li>
+            <a href="/concepts/roles.html">Orgs, Spaces, Roles, and Permissions</a>
+          </li>
+          <li>
+            <a href="/concepts/security.html">Cloud Foundry Security</a>
+          </li>
+            <li>
+            <a href="/concepts/http-routing.html">HTTP Routing</a>
+          </li>
+          <li>
+            <a href="/concepts/stacks.html">Stacks</a>
+          </li>
+          <li>
+            <a href="/concepts/docker.html">Using Docker in Cloud Foundry</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="has_submenu">
+        <span>
+          Logging and Metrics in Cloud Foundry
+        </span>
+        <ul>
+          <li>
+            <a href="/loggregator/architecture.html">Overview of the Loggregator System</a>
+          </li>
+          <li>
+            <a href="/loggregator/cli-plugin.html">Installing the Loggregator Plugin for CF CLI</a>
+          </li>
+          <li>
+            <a href="/loggregator/cc-uaa-logging.html">Security Event Logging for Cloud Controller and UAA</a>
+          </li>
+          <li>
+            <a href="/loggregator/all_metrics.html">Cloud Foundry Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/dea-metrics.html">DEA Architecture Component Metrics</a>
+          </li>
+          <li>
+            <a href="/loggregator/log-ops-guide.html">Loggregator Guide for Cloud Foundry Operators</a>
+          </li>
+          <li>
+            <a href="/loggregator/data-sources.html">Cloud Foundry Data Sources</a>
+          </li>
+          <li>
+            <a href="/loggregator/nozzle-tutorial.html">Deploying a Nozzle to the Loggregator Firehose</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/api/uaa/index.html">UAA API</a>
+      </li>
+      <li>
+        <a href="http://bosh.io/docs/">BOSH</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container" >
+    Upgrading Dependency Versions
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li><a href="#buildpacks-team">Cloud Foundry Buildpacks Team Process</a></li>
+<li><a href="#building">Building the Binaries</a></li>
+<li><a href="#manifest-updates">Updating Buildpack Manifests</a></li>
+<li>
+<a href="#buildpacks">Buildpacks</a><ul>
+<li><a href="#build-go-buildpack">Go Buildpack</a></li>
+<li><a href="#build-nodejs-buildpack">Nodejs Buildpack</a></li>
+<li><a href="#build-python-buildpack">Python Buildpack</a></li>
+<li><a href="#build-java-buildpack">Java Buildpack</a></li>
+<li><a href="#build-ruby-buildpack">Ruby Buildpack</a></li>
+<li><a href="#build-php-buildpack">PHP Buildpack</a></li>
+<li><a href="#build-staticfile-buildpack">Staticfile Buildpack</a></li>
+<li><a href="#build-binary-buildpack">Binary Buildpack</a></li>
+</ul>
+</li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p><strong></strong></p>
+
+<p>This topic describes how to upgrade a dependency version in a custom buildpack. These procedures enable Cloud Foundry (CF) operators to maintain custom buildpacks that contain dependencies outside of the dependencies in the CF system buildpacks.</p>
+
+<h2><a id="buildpacks-team"></a>Cloud Foundry Buildpacks Team Process</h2>
+
+<p>The CF buildpacks team uses the following tools to update dependencies:</p>
+
+<ul>
+<li>A <a href="https://concourse.ci">Concourse</a> deployment of the <a href="https://github.com/cloudfoundry/buildpacks-ci">buildpacks-ci</a> pipelines</li>
+<li><a href="https://www.pivotaltracker.com">Pivotal Tracker</a> for workflow management</li>
+</ul>
+
+<p class="note"><strong>Note</strong>: The procedures in this topic refer to the tools used by the CF buildpacks team. However, the procedures do not require the specific tools mentioned above. You can use any CI and workflow management tool to update dependencies in custom buildpacks.</p> 
+
+<p>When the <a href="https://buildpacks.ci.cf-app.com/pipelines/notifications/jobs/New%20Releases">New Releases</a> job in the <a href="https://buildpacks.ci.cf-app.com/pipelines/notifications">notifications pipeline</a>
+detects a new version of a tracked dependency in a buildpack, it creates a <a href="https://www.pivotaltracker.com">Tracker</a> story about building and including the new version of the dependency in the buildpack manifests. It also posts a message as the <code>dependency-notifier</code> to the <a href="https://cloudfoundry.slack.com/messages/buildpacks/">#buildpacks channel</a> in the Cloud Foundry Slack.</p>
+
+<h2><a id="building"></a>Building the Binaries</h2>
+
+<p>For all dependencies, you must build the binary from source or acquire the binary as a tarball from a trusted source. For most dependencies, the CF buildpacks team builds the binaries from source.</p>
+
+<p class="note"><strong>Note</strong>: The steps below assume you are using a Concourse deployment of the <code>buildpacks-ci</code> pipelines and Pivotal Tracker.</p>
+
+<p>To build the binary for a dependency, perform the following steps:</p>
+
+<ol>
+<li>Change into the <code>buildpacks-ci</code> directory and check that there are no uncommitted changes.
+<pre class='terminal'>
+$ cd ~/workspace/buildpacks-ci
+$ git status
+</pre></li>
+<li>Check out the <code>binary-builds</code> branch. This is an orphan branch of <code>buildpacks-ci</code> that the CF buildpacks team uses as a separate resource on Concourse to trigger the binary building process.
+<pre class="terminal">
+$ git checkout binary-builds
+</pre></li>
+<li>Pull the branch to make sure it is up to date.
+<pre class="terminal">
+$ git pull -r
+</pre></li>
+<li><p>Locate the YAML file for the buildpack you want to build a binary for. The directory contains YAML files for all the packages and dependencies tracked by the CF buildpacks team. Each YAML file correlates to the build queue for one dependency or package and the naming format is <code>DEPENDENCY-NAME.yml</code>. For example, the YAML file tracking the build queue for Ruby is called <code>ruby-builds.yml</code> and contains the following contents:</p>
+<pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="s">ruby</span><span class="pi">:</span> <span class="pi">[]</span>
+</code></pre></li>
+<li><p>Different buildpacks use different signatures for verification. Determine which signature your buildpack requires by consulting the <a href="#buildpacks">list</a> below and follow the instructions to locate the SHA256, MD5, or GPG signature for the binary:</p>
+
+<ul>
+<li>For the SHA256 of a file, run <code>shasum -a 256 FILE</code>. </li>
+<li>For the MD5 of a file, run <code>md5 FILE</code>. </li>
+<li>For the GPG signature (for Nginx), see the <a href="http://nginx.org/en/download.html">Nginx Downloads</a> page.</li>
+</ul></li>
+<li><p>Add the version and verification for the new binary to the YAML file as attributes of an element under the dependency name. For example, to build the Ruby 2.3.0 binary verified with SHA256, add the following:</p>
+<pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="s">ruby</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">version</span><span class="pi">:</span> <span class="s">2.3.0</span>
+  <span class="s">sha256</span><span class="pi">:</span> <span class="s">ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507</span>
+</code></pre>
+
+<p class="note"><strong>Note</strong>: Do not preface the version number with the name of the binary or language. For example, specify <code>2.3.0</code> for <code>version</code> instead of <code>ruby-2.3.0</code>.</p>
+
+<p>You can enqueue builds for multiple versions at once. For example, to build both the Ruby 2.3.0 binary and the Ruby 2.3.1 binary, add the following:</p>
+<pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="s">ruby</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">version</span><span class="pi">:</span> <span class="s">2.3.0</span>
+  <span class="s">sha256</span><span class="pi">:</span> <span class="s">ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507</span>
+<span class="pi">-</span> <span class="s">version</span><span class="pi">:</span> <span class="s">2.3.1</span>
+  <span class="s">sha256</span><span class="pi">:</span> <span class="s">b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd</span>
+</code></pre></li>
+<li><p>Stage your changes for commit:</p>
+
+<pre class="terminal">$ git add .</pre></li>
+<li><p>Commit your changes using the Tracker story number.</p>
+
+<pre class="terminal">$ git commit -m "YOUR-COMMIT-MESSAGE[#STORY_NUMBER]"</pre></li>
+<li><p>Push your changes to the remote origin. </p>
+
+<pre class="terminal">$ git push</pre></li>
+<li><p>Pushing your changes triggers the binary building process, which you can  monitor at the <a href="https://buildpacks.ci.cf-app.com/pipelines/binary-builder">binary-builder pipeline</a>
+of your own <code>buildpacks-ci</code> Concourse deployment. When the build completes, it adds a link to the Concourse build run to the Tracker story for the new release. </p>
+
+<p class="note"><strong>Note</strong>: Binary builds are executed by the CF <a href="https://github.com/cloudfoundry/binary-builder">Binary Builder</a> and the <a href="https://github.com/cloudfoundry/buildpacks-ci/blob/master/pipelines/binary-builder.yml">binary-builder pipeline</a>.</p></li>
+</ol>
+
+<h2><a id="manifest-updates"></a>Updating Buildpack Manifests</h2>
+
+<p>After you build the binary for a dependency that you can access and download from a URL, follow these instructions to add the dependency version to the buildpack manifest.</p>
+
+<p class="note"><strong>Note</strong>: The steps below assume you are using a Concourse deployment of the <code>buildpacks-ci</code> pipelines and Pivotal Tracker.</p>
+
+<ol>
+<li><p>Change into the directory of the buildpack for which you want to update dependencies and check out the <code>develop</code> branch. 
+<pre class="terminal">
+$ cd ~/workspace/ruby-buildpack
+$ git checkout develop
+</pre></p></li>
+<li><p>Open the <code>manifest.yml</code> for the buildpack and remove or add dependencies.</p>
+<pre class="highlight yaml"><code><span class="s">dependencies</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">ruby</span>
+    <span class="s">version</span><span class="pi">:</span> <span class="s">2.3.0</span>
+    <span class="s">md5</span><span class="pi">:</span> <span class="s">535342030a11abeb11497824bf642bf2</span>
+    <span class="s">uri</span><span class="pi">:</span> <span class="s">https://pivotal-buildpacks.s3.amazonaws.com/concourse-binaries/ruby/ruby-2.3.0-linux-x64.tgz</span>
+    <span class="s">cf_stacks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">cflinuxfs2</span>
+</code></pre>
+
+<ul>
+<li>Follow the current structure of the manifest. For example, if the manifest includes the two most recent patch versions for each minor version of the language, do the same, such as both <code>ruby-2.1.9</code> and <code>ruby-2.1.8</code>. </li>
+<li>Paste in the <code>uri</code> and the <code>md5</code> from the <code>build-BINARY-NAME</code> job that ran in the Concourse binary-builder pipeline.
+<p class="note"><strong>Note</strong>: In the PHP buildpack, you may see a <code>modules</code> line for each PHP dependency in the manifest. Do not include this in your new PHP dependency entry. This will be added to the manifest by the <code>ensure-manifest-has-modules</code> Concourse job in the <code>php-buildpack</code> when you commit and push your changes. You can find this in the output logs of the <code>build-out</code> task.</p></li>
+</ul></li>
+<li><p>Replace any other mentions of the old version number in the buildpack repo with the new version number. The CF buildpack team uses <a href="https://github.com/ggreer/the_silver_searcher">Ag</a> for text searching.</p>
+
+<pre class="terminal">$ ag OLD-VERSION</pre></li>
+<li><p>Run the following command to package and upload the buildpack, setup the org and space for tests in the specified CF deployment, and run the CF buildpack tests.</p>
+
+<pre class="terminal">$ BUNDLE_GEMFILE=cf.Gemfile buildpack-build</pre>
+
+<p>If the command fails, you may need to fix or change the tests, fixtures, or other parts of the buildpack.</p></li>
+<li><p>Once the test suite completely passes, push your changes:</p>
+
+<pre class="terminal">
+$ git add .
+$ git commit -m "YOUR-MESSAGE[#TRACKER-STORY-ID]"
+$ git push
+</pre></li>
+<li><p>Watch the <code>LANGUAGE-buildpack</code> pipeline in Concourse. Once the test suite builds pass for the buildpack (the <code>specs-lts-develop</code> job and <code>specs-edge-develop</code> job), you can mark the Tracker story for the new Dependency release as delivered. Paste links for those successful test suite builds in the Tracker story.</p></li>
+</ol>
+
+<h2><a id='buildpacks'></a>Buildpacks</h2>
+
+<p>The following list contains information about the buildpacks maintained by the CF buildpacks team.</p>
+
+<h3><a id="build-go-buildpack"></a>Go Buildpack</h3>
+
+<p><strong>Go</strong>: </p>
+
+<ul>
+<li>Built from: a tarred binary (<code>GO-VERSION.linux-amd64.tar.gz</code>) provided by Google on the Go <a href="https://golang.org/dl/">Downloads</a> page</li>
+<li>Verified with: the MD5 of the tarred binary</li>
+<li>Example usage: <a href="https://github.com/cloudfoundry/go-buildpack/blob/v1.7.8/manifest.yml#L33-L34">Using the Google Tarred Binary for Go 1.6.2</a></li>
+</ul>
+
+<p><strong>Godep</strong>: </p>
+
+<ul>
+<li>Built from: a source code <code>.tar.gz</code> file from the <a href="https://github.com/tools/godep/releases">Godep Github releases</a> page </li>
+<li><p>Verified with: the SHA256 of the source
+Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/42a361193ea9a4c77a93451228c93bf96f78d50a">Automated enqueuing of binary build for Godep 72</a></p>
+
+<p class="note"><strong>Note</strong>: The <a href="https://github.com/cloudfoundry/buildpacks-ci">buildpacks-ci</a> <a href="https://github.com/cloudfoundry/buildpacks-ci/blob/master/pipelines/binary-builder.yml">binary-builder</a> pipeline automates the process of detecting, uploading, and updating Godep in the manifest.</p></li>
+</ul>
+
+<h3><a id="build-nodejs-buildpack"></a>Nodejs Buildpack</h3>
+
+<p><strong>Node</strong>: </p>
+
+<ul>
+<li>Verified with: the SHA256 of the <code>node-vVERSION.tar.gz</code> file listed on <code>https://nodejs.org/dist/vVERSION/SHASUMS256.txt</code> For example, for Node version 4.4.6, the CF buildpacks team verifies with the SHA256 for <code>node-v4.4.6.tar.gz</code> on its <a href="https://nodejs.org/dist/v4.4.6/SHASUMS256.txt">SHASUMS256</a> page.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/1747c697dc29db0180253c5d466804784cb3fcce">Enqueuing binary builds for Node 4.4.5 and 6.2.0</a></li>
+</ul>
+
+<h3><a id="build-python-buildpack"></a>Python Buildpack</h3>
+
+<p><strong>Python</strong>: </p>
+
+<ul>
+<li>Verified with: the MD5 of the <code>Gzipped source tarball</code>, listed on: <code>https://www.python.org/downloads/release/python-VERSION/</code> where <code>VERSION</code> has no periods. For example, for Python version <code>2.7.12</code>, use the MD5 for the <code>Gzipped source tarball</code> on its <a href="https://www.python.org/downloads/release/python-2712/">Downloads</a> page. </li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/79e4ce891281ce3ec376b00c967465fc8c7383f8">Enqueuing binary build for Python 2.7.12</a></li>
+</ul>
+
+<h3><a id='build-java-buildpack'></a>Java Buildpack</h3>
+
+<p><strong>OpenJDK</strong>: </p>
+
+<ul>
+<li>Built from: the tarred <a href="https://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml">OpenJDK files</a> managed by the CF Java Buildpack team. </li>
+<li>Verified with: the MD5 of the tarred OpenJDK files.</li>
+</ul>
+
+<h3><a id="build-ruby-buildpack"></a>Ruby Buildpack</h3>
+
+<p><strong>JRuby</strong>: </p>
+
+<ul>
+<li>Verified with: the MD5 of the Source <code>.tar.gz</code> file from the <a href="http://jruby.org/download">JRuby Downloads</a> page.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/1c90967bcb511e7657202a1308e530825e372158">Enqueuing binary build for JRuby 9.1.2.0</a></li>
+</ul>
+
+<p><strong>Ruby</strong>: </p>
+
+<ul>
+<li>Verified with: the SHA256 of the source from the <a href="https://www.ruby-lang.org/en/downloads/">Ruby Downloads</a> page</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/8d06eaa6573146b9771de7f96cebf85e07719d79">Enqueuing binary builds for Ruby 2.2.5 and 2.3.1</a></li>
+</ul>
+
+<p><strong>Bundler</strong>: </p>
+
+<ul>
+<li>Verified with: the SHA256 of the <code>.gem</code> file from <a href="https://rubygems.org/gems/bundler">Rubygems</a>.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/cd161594a564631dff13e8c101205f922beb5cf8">Enqueuing binary build for Bundler 1.12.5</a></li>
+</ul>
+
+<h3><a id="build-php-buildpack"></a>PHP Buildpack</h3>
+
+<p><strong>PHP</strong>: </p>
+
+<ul>
+<li>Verified with: the SHA256 of the <code>.tar.gz</code> file from the <a href="http://php.net/downloads.php">PHP Downloads</a> page. </li>
+<li>For PHP5 versions, the CF buildpacks team enqueues builds in the <code>php-builds.yml</code> file in the <code>binary-builds</code> branch. For PHP7 versions, the CF buildpacks team enqueues builds in the <code>php7-builds.yml</code> file in the <code>binary-builds</code> branch.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/cfb02b7d590996d3727dea9192d2da1ae0aaa595">Enqueuing binary builds for PHP 5.5.37, 5.6.23, and 7.0.8</a></li>
+</ul>
+
+<p><strong>Nginx</strong>: </p>
+
+<ul>
+<li>Verified with: the <code>gpg-rsa-key-id</code> and <code>gpg-signature</code> of the version. The <code>gpg-rsa-key-id</code> is the same for each version/build, but the <code>gpg-signature</code> will be different. This information is located on the <a href="https://nginx.org/en/download.html">Nginx Downloads</a> page.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/b86a09a46eb071957adaecd3a16d1ebba9cd0973">Enqueuing binary build for Nginx 1.11.0</a></li>
+</ul>
+
+<p><strong>HTTPD</strong>: </p>
+
+<ul>
+<li>Verified with: the MD5 of the <code>.tar.bz2</code> file from the <a href="https://httpd.apache.org/download.cgi">HTTPD Downloads</a> page.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/cee826dc978f013840ef6a8193ec6ee75536778b">Enqueuing binary build for HTTPD 2.4.20</a></li>
+</ul>
+
+<p><strong>Composer</strong>: </p>
+
+<ul>
+<li>Verified with: the SHA256 of the <code>composer.phar</code> file from the <a href="https://getcomposer.org/download/">Composer Downloads</a> page.</li>
+<li><p>For Composer, there is no build process as the <code>composer.phar</code> file is  the binary. In the manual process,
+connect to the <code>pivotal-buildpacks</code> S3 bucket using the correct AWS credentials. Create a new directory with the name of the
+composer version (ex. <code>1.0.2</code>) and put the appropriate <code>composer.phar</code> file into that directory. For Composer <code>v1.0.2</code>, connect and create the <code>php/binaries/trusty/composer/1.0.2</code> directory. Then place the <code>composer.phar</code> file into that directory so the binary
+is available at <code>php/binaries/trusty/composer/1.0.2/composer.phar</code>.</p>
+
+<p class="note"><strong>Note</strong>: The <a href="https://github.com/cloudfoundry/buildpacks-ci">buildpacks-ci</a> <a href="https://github.com/cloudfoundry/buildpacks-ci/blob/master/pipelines/binary-builder.yml">binary-builder</a> pipeline automates the process of detecting, uploading, and updating Composer in the manifest.</p></li>
+<li><p>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/d51abbdb919ca51df86628b37366c55311b05f38">Automated enqueuing of binary build for Composer 1.1.2</a></p></li>
+</ul>
+
+<h3><a id="build-staticfile-buildpack"></a>Staticfile Buildpack</h3>
+
+<p><strong>Nginx</strong>: </p>
+
+<ul>
+<li>Verified with: the <code>gpg-rsa-key-id</code> and <code>gpg-signature</code> of the version. The <code>gpg-rsa-key-id</code> is the same for each version/build, but the <code>gpg-signature</code> will be different. This information is located on the <a href="https://nginx.org/en/download.html">Nginx Downloads</a> page.</li>
+<li>Example: <a href="https://github.com/cloudfoundry/buildpacks-ci/commit/b86a09a46eb071957adaecd3a16d1ebba9cd0973">Enqueuing binary build for Nginx 1.11.0</a></li>
+</ul>
+
+<h3><a id="build-binary-buildpack"></a>Binary Buildpack</h3>
+
+<p>The Binary buildpack does not have any dependencies.</p>
+
+        <a id='repo-link' href='http://github.com/cloudfoundry/docs-buildpacks/tree/master/upgrading_dependency_versions.html.md.erb'>View the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='/'>Cloud Foundry Documentation</a>
+  &copy; 2016 <a href='http://cloudfoundry.org'>Cloud Foundry Foundation</a>. All Rights Reserved.
+</div>
+<div class="support">
+  <a href="https://www.cloudfoundry.org/contribute/" target="_blank">Get Involved</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+</html>
