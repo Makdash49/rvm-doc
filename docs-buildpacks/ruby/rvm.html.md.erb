@@ -6,9 +6,9 @@ owner: Buildpacks
 <strong><%= modified_date %></strong>
 
 
-Ruby Version Manager (RVM) is a command line tool for installing and managing Ruby versions and Ruby gems.
+Ruby Version Manager (RVM) is a command line tool you use to install and manage Ruby versions and Ruby gems.
 
-RVM helps you work on multiple projects that use different versions of Ruby. It allows you to quickly switch between different versions of Ruby which you have installed on your computer. RVM helps you avoid conflicts with Ruby gems that only work with specific Ruby versions.
+You can use RVM to work on multiple projects that use different versions of Ruby.  You can quickly switch between different versions of Ruby which you have installed on your computer.  You can avoid conflicts with Ruby gems that only work with specific Ruby versions.
 
 The official website for RVM is: https://rvm.io/
 
@@ -24,7 +24,7 @@ If RVM is installed you will see a message that shows the version number.
   rvm 1.27.0 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
 </pre>
 
-If the reply includes `(latest)` you know you have the latest version.  Otherwise download the latest version following the steps in the next section.
+If the reply includes `(latest)` you have the latest version.  Otherwise download the latest version following the steps in the next section.
 
 
 You can see useful information about RVM with this command: `rvm info`
@@ -129,6 +129,8 @@ For instance: `rvm install 2.1.6`
 
 ## <a id='change-ruby-versions'></a>Change Ruby Versions ##
 
+You can quickly switch to a different Ruby version.
+
 See which versions of Ruby you have installed with `rvm list`
 
 <pre class="terminal">
@@ -208,7 +210,7 @@ You may receive a message that a gemset does not exist.
 
 Copy and paste the second quoted part of the message and run it in your command line.  In this example: `rvm ruby-2.1.2 do rvm gemset create example-project`
 
-Go the parent directory of the project by typing: `cd ..`
+Go to the parent directory of the project by typing: `cd ..`
 
 Change to a different Ruby version by typing:  `rvm use DIFFERENT-RUBY-VERSION`
 
@@ -216,11 +218,11 @@ For example:  `rvm use 2.3.0`
 
 Check the ruby version by typing: `ruby -v`  
 
-It will be the one you just changed to.  In this example, `2.3.0`.
+It will be the one you just changed to.  In this example: `2.3.0`
 
 `cd` back into your project and type:  `ruby -v`
 
-The Ruby version will be the one you set for that project. In this example, `2.1.2`.
+The Ruby version will be the one you set for that project. In this example: `2.1.2`
 
 <pre class="terminal">
   $ ruby -v
